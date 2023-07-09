@@ -1,17 +1,16 @@
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Navbar from '../NavBar/Navbar';
 
 const Layout = (props) => {
-    return (  
-        <div style={{display:"flex",height:"100vh",flexDirection:"column"}}>
-            <Header />
-            <div style={{flexGrow:1}}>
-                <div className="container">{props.children}</div>
-            </div>
-            <Footer />
-        </div>
-    );
-}
- 
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <Navbar />
+      <section className="bg-secondary flex-1 p-3 ">{props.children}</section>
+      <Footer />
+    </div>
+  );
+};
+
 export default Layout;

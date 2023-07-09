@@ -20,6 +20,20 @@ module.exports = {
     },
     container: {
       center: true,
+      padding: {
+        DEFAULT: '0rem',
+        sm: '2rem',
+        lg: '4rem',
+        xl: '4rem',        
+      }
+    },
+    listStyleType: {
+      none: 'none',
+      disc: 'disc',
+      decimal: 'decimal',
+      square: 'square',
+      roman: 'upper-roman',
+      circle:"circle",
     },
   },
   plugins: [],

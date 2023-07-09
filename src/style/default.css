@@ -2,3 +2,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#CR a,
+#gazette a {
+  text-decoration: underline;
+  color: blueviolet;
+}
+
+#gridPhoto figure {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+#gridPhoto figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  width: 75%;
+  background-color: #061f5398;
+  color: #efefef;
+  padding: 0.5em 0.5em;
+  text-align: center;
+}
