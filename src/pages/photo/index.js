@@ -32,8 +32,8 @@ const Photo = () => {
     cat === 'all' ? (
       <div>
         <a href={'/' + photo[0]}>
-          <figure className='overflow-hidden max-h-80' >
-            <img src={'/' + photo[0]} alt={photo[1]}  />
+          <figure className="overflow-hidden max-h-80">
+            <img src={'/' + photo[0]} alt={photo[1]} />
             <figcaption>{photo[1]}</figcaption>
           </figure>
         </a>
@@ -42,8 +42,8 @@ const Photo = () => {
       photo[2] === cat && (
         <div>
           <a href={'/' + photo[0]}>
-            <figure className='overflow-hidden max-h-80'>
-              <img src={'/' + photo[0]} alt={photo[1]}  />
+            <figure className="overflow-hidden max-h-80">
+              <img src={'/' + photo[0]} alt={photo[1]} />
               <figcaption>{photo[1]}</figcaption>
             </figure>
           </a>
@@ -57,7 +57,10 @@ const Photo = () => {
       <h2 className="text-3xl font-semibold text-center"> Photos </h2>
       <div className="">
         <button
-          className="bg-primary py-2 px-4 rounded-md"
+          className={[
+            'bg-primary py-2 px-4 rounded-md ml-3  hover:bg-tertiaire'   ,
+            (cat=="residence" ? "bg-tertiaire" :"")       
+          ].join(" ")}
           id="residence"
           onClick={() => afficherImg('residence')}
         >
@@ -65,7 +68,10 @@ const Photo = () => {
           Résidence{' '}
         </button>
         <button
-          className="bg-primary py-2 px-4 rounded-md ml-3"
+          className={[
+            'bg-primary py-2 px-4 rounded-md ml-3  hover:bg-tertiaire'   ,
+            (cat=="noel" ? "bg-tertiaire" :"")       
+          ].join(" ")}
           id="noel"
           onClick={() => afficherImg('noel')}
         >
@@ -73,7 +79,12 @@ const Photo = () => {
           Concours Noël
         </button>
       </div>
-      <div id='gridPhoto' className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">{gridPhoto}</div>
+      <div
+        id="gridPhoto"
+        className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5"
+      >
+        {gridPhoto}
+      </div>
     </div>
   );
 };

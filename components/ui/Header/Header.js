@@ -4,9 +4,9 @@ const Header = () => {
   return (
     <div className="bg-primary p-2">
       <div className="container">
-        <div className="flex  flex-wrap justify-between items-center	">
-          <div className="flex-auto text-center md:text-left ">
-            <h1 className="font-bold	text-2xl md:text-5xl">
+        <div className="flex  flex-wrap justify-between items-center gapx-2	">
+          <div className="flex-auto text-center lg:text-left ">
+            <h1 className="font-semibold	text-2xl md:text-5xl">
               {' '}
               La Résidence GAMBETTA{' '}
             </h1>{' '}

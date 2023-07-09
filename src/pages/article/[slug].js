@@ -16,13 +16,13 @@ const Slug = (props) => {
     <div className="container">
       <div className="flex flex-col justify-center  ">
         <h1 className="text-3xl font-extrabold">{title}</h1>
-        {/* <Image
+        <Image
           className="mt-5 mx-auto"
           src={'/' + imgPath}
           alt="alt"
           width={800}
           height={600}
-        /> */}
+        />
         <div className='mt-5'>{htmlParser.parse(content)}</div>
         <div className='mt-4 pt-2 border-t-2 border-quartary'> <span className='italic text-sm'>Ecrit le {dateCreateFormated} par </span> <span className='font-bold'>{author}</span></div>
 
