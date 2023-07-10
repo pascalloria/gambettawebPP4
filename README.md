@@ -1,9 +1,8 @@
 
-A faire :
-
-Regler les photo des cartes article
-regler la date  et l'auteur qui sont collé.
-
+- [x] API + Formulaire ajout d'un article
+- [x] API + Formulaire upload d'une image
+- [] API + Formulaire upload de documents
+ 
 
 ---
 
@@ -15,6 +14,8 @@ Technologie use :
 - NextAuth
 - html-to-react
 
+
+----
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

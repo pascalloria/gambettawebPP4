@@ -5,7 +5,7 @@ import { SpinnerDotted } from 'spinners-react';
 
 import Input from '../../../components/Input';
 import { checkValidity } from '@/helpers/utility';
-import ImageUpload from '../../../components/ImageUpload/ImageUpload';
+import ImageUploadForm from '../../../components/ImageUpload/ImageUploadForm';
 
 const Ajouter = (props) => {
   // state
@@ -14,8 +14,7 @@ const Ajouter = (props) => {
   const [error, setError] = useState();
   const router = useRouter();
   const [selectedImage, setSelectedImage] = useState('');
-  const [selectFile, setSelectFile] = useState();
-  const [imgPath,SetImgPath]= useState("")
+  const [selectFile, setSelectFile] = useState(); 
   
 
   // Définition des eléments du formulaire ainsi que leurs parametres
@@ -243,7 +242,7 @@ const Ajouter = (props) => {
 
       <h1 className="text-center text-3xl font-semibold">Ajouter un Article</h1>
       <div className="mx-auto">
-        <ImageUpload
+        <ImageUploadForm
           selectedImage={selectedImage}
           onChange={({ target }) => {
             if (target.files) {
@@ -253,7 +252,7 @@ const Ajouter = (props) => {
            
             }
           }}
-          HandleUpload={(click) => (child = click)}
+          
         />
       </div>
 
