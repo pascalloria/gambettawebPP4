@@ -16,15 +16,14 @@ const Navbar = () => {
     if (640 < windowSize.width) {
       setCollapse(false);
     }
-    console.log(collapse)
+
     return () => window.removeEventListener('resize', handleResize);
   }, [windowSize.width]);
 
-  // Function 
-  
+  // Function
+
   const handleCollapse = () => {
     setCollapse(!collapse);
-    console.log(collapse);
   };
   const handleResize = () => {
     setWindowSize({

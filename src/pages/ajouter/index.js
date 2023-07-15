@@ -109,10 +109,7 @@ const Ajouter = (props) => {
         method: 'POST',
         body,
       });
-
-      console.log(response);
-      
-      // SetImgPath(response.url)
+   
     } catch (error) {
       console.log(error.response?.data);
     }

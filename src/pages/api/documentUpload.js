@@ -1,5 +1,6 @@
 import { IncomingForm } from 'formidable';
 import { promises as fs } from 'fs';
+import { split } from 'postcss/lib/list';
 
 var mv = require('mv');
 
@@ -14,11 +15,23 @@ export default async (req, res) => {
     const form = new IncomingForm();
 
     form.parse(req, (err, fields, files) => {
+      // Recuperons l'extension du fichier
+      let ext = split(files.myDoc[0].mimetype, '/')[1];
+
+      // Verifions que le type du fichier est authorisé
+      let authorizedExt = ['png', 'jpg', 'jpeg', 'pdf', 'webp'];
+      if (!authorizedExt.includes(ext)) {
+        return res.status(600).send('Mauvaise extensions');
+      }
+      // Verifions l'absence d'erreur
       if (err) return reject(err);
-      // console.log(files.myDoc[0].filepath)
+
+      // Deplacons le fichier
       var oldPath = files.myDoc[0].filepath;
-      var newPath = `./public/Ressources/${fields.folder[0]}/${fields.newName[0]}.pdf`;
+      var newPath = `./public/${fields.folder[0]}/${fields.newName[0]}.${ext}`;
       mv(oldPath, newPath, function (err) {});
+
+      // Renvoyons le code de succes et les données
       res.status(200).json({ fields, files, newPath });
     });
   });

@@ -87,7 +87,7 @@ const Gazette = () => {
 
             <div className=" mt-9 border-t-2 border-quartary">
               <DocumentUploadForm
-                folder="Gazette"
+                folder="Ressources/Gazette"
                 type="une gazette"
                 placeholder="GA N-X MMM YY"
               />

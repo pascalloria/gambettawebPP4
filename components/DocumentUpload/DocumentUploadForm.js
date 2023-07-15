@@ -24,11 +24,7 @@ const DocumentUploadForm = (props) => {
         method: 'POST',
         body,
       });
-
-      console.log(response);
-    } catch (error) {
-      console.log(error.response?.data);
-    }
+    } catch (error) {}
     setIsLoading(false);
   };
 

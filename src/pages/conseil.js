@@ -131,7 +131,7 @@ const Conseil = () => {
             </div>
             <div className=" mt-9 border-t-2 border-quartary">
               <DocumentUploadForm
-                folder="CR"
+                folder="Ressources/CR"
                 type="un compte rendu"
                 placeholder="AA_MM_JJ TITRE"
               />
