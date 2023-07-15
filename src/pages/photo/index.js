@@ -1,56 +1,28 @@
 import { useState } from 'react';
+import { buildDataSWR } from '@/helpers/folderFilesFetcher';
 
 const Photo = () => {
-  const [cat, setCat] = useState('all');
+  const [cat, setCat] = useState('residence');
 
   const afficherImg = (category) => {
-    if (cat === category) {
-      setCat('all');
-    } else {
-      setCat(category);
-    }
-
-    console.log(cat);
+    setCat(category);
   };
 
-  let photos = [
-    ['residence/Photo2.jpg', 'Petit bois sous la neige', 'residence'],
-    ['residence/Photo3.jpg', 'Soleil tapant sur une facade', 'residence'],
-    ['residence/Photo4.jpeg', 'Résidence en Automne', 'residence'],
-    ['residence/Photo5.jpeg', 'Résidence en Automne', 'residence'],
-    ['residence/Photo6.jpeg', 'Résidence en Automne', 'residence'],
-    ['residence/Photo7.jpeg', 'Résidence en Automne', 'residence'],
-    ['residence/Photo8.jpeg', 'Résidence en Automne', 'residence'],
-    ['residence/Photo9.jpeg', 'Résidence en Automne', 'residence'],
-    ['noel/image1.webp', 'Sapin et enfants', 'noel'],
-    ['noel/image2.jpg', 'Dessins des enfants', 'noel'],
-    ['noel/image3.jpg', 'Table des délices', 'noel'],
-    ['noel/image4.jpg', 'Sapin et cadeaux', 'noel'],
-  ];
+  const { data } = buildDataSWR('Photos/' + cat);
 
-  let gridPhoto = photos.map((photo) =>
-    cat === 'all' ? (
+  let gridPhoto;
+  if (data) {
+    gridPhoto = data.map((photo) => (
       <div>
-        <a href={'/' + photo[0]}>
+        <a href={photo.path}>
           <figure className="overflow-hidden max-h-80">
-            <img src={'/' + photo[0]} alt={photo[1]} />
-            <figcaption>{photo[1]}</figcaption>
+            <img src={photo.path} alt={photo.name} />
+            <figcaption>{photo.name}</figcaption>
           </figure>
         </a>
       </div>
-    ) : (
-      photo[2] === cat && (
-        <div>
-          <a href={'/' + photo[0]}>
-            <figure className="overflow-hidden max-h-80">
-              <img src={'/' + photo[0]} alt={photo[1]} />
-              <figcaption>{photo[1]}</figcaption>
-            </figure>
-          </a>
-        </div>
-      )
-    )
-  );
+    ));
+  }
 
   return (
     <div className="container">
@@ -58,9 +30,9 @@ const Photo = () => {
       <div className="">
         <button
           className={[
-            'bg-primary py-2 px-4 rounded-md ml-3  hover:bg-tertiaire'   ,
-            (cat=="residence" ? "bg-tertiaire" :"")       
-          ].join(" ")}
+            'bg-primary py-2 px-4 rounded-md ml-3  hover:bg-tertiaire',
+            cat == 'residence' ? 'bg-tertiaire' : '',
+          ].join(' ')}
           id="residence"
           onClick={() => afficherImg('residence')}
         >
@@ -69,9 +41,9 @@ const Photo = () => {
         </button>
         <button
           className={[
-            'bg-primary py-2 px-4 rounded-md ml-3  hover:bg-tertiaire'   ,
-            (cat=="noel" ? "bg-tertiaire" :"")       
-          ].join(" ")}
+            'bg-primary py-2 px-4 rounded-md ml-3  hover:bg-tertiaire',
+            cat == 'noel' ? 'bg-tertiaire' : '',
+          ].join(' ')}
           id="noel"
           onClick={() => afficherImg('noel')}
         >

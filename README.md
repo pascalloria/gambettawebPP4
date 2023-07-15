@@ -2,9 +2,11 @@
 - [x] API + Formulaire ajout d'un article
 - [x] API + Formulaire upload d'une image
 - [x] API + Formulaire upload de documents Gazette 
+- [x] Facotriser API ReadFiles ( 1 API pour Gazette , CR , Photo)
 
-Factoriser API Document Upload ( voir avoir une API pour Document / image )
-Facotriser API ReadFiles ( 1 API pour Gazette , CR , Photo)
+- Factoriser API Document Upload ( voir avoir une API pour Document / image )
+- Nom photo et upload Photo ?
+
  
 
 ---

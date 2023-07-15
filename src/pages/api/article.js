@@ -2,9 +2,9 @@ import { connectToDatabase } from '@/helpers/mongoBD';
 
 export default async function handler(req, res) {
   if (req.method == 'POST') {
-    const { title, slug, author, content, resume ,imgPath } = req.body;
+    const { title, slug, author, content, resume, imgPath } = req.body;
     // verifier que tous les champs soit rempli
-    if (!title || !slug || !author || !content || !resume ) {
+    if (!title || !slug || !author || !content || !resume) {
       res.status(422).json({ message: 'Champ du formulaire manquant' });
       return;
     }
@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       content,
       resume,
       dateCreate: new Date(),
-      imgPath :imgPath ? imgPath : "Header.jpg",
+      imgPath: imgPath ? imgPath : 'Header.jpg',
     };
 
     // connextion a mongoDB

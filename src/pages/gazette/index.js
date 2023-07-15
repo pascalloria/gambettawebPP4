@@ -1,18 +1,19 @@
 import DocumentUploadForm from '../../../components/DocumentUpload/DocumentUploadForm';
-import useSWR from 'swr';
+import { buildDataSWR } from '@/helpers/folderFilesFetcher';
+
 
 const Gazette = () => {
+  
+  
+
+  // Recuper les fichier présent dans le dossier CR et construire un tableau avec leur URL
   let docs;
-  // Recuper les fichier présent dans le dossier et construire un tableau avec leur URL
-
-  const fetcher = (url) => fetch(url).then((res) => res.json());
-  const { data } = useSWR('/api/readFiles', fetcher);
-
+  const { data } = buildDataSWR('Ressources/Gazette');
   if (data) {
-    docs = data.map((doc,i) => (
+    docs = data.map((doc, i) => (
       <li key={i}>
-        <a href={doc[0]} download={doc[1]}>
-          {doc[1]}
+        <a href={doc.path} download={doc.name}>
+          {doc.name}
         </a>
       </li>
     ));
@@ -45,13 +46,15 @@ const Gazette = () => {
 
             <object
               id="gazettePdf"
-              data={data ? data.slice(-1)[0][0] + '#toolbar=0' : 'Loading...'}
+              data={data ? data.slice(-1)[0].path + '#toolbar=0' : 'Loading...'}
               type="application/pdf"
               width="100%"
               height="600"
             >
               <embed
-                src={data ? data.slice(-1)[0][0] + '#toolbar=0' : 'Loading...'}
+                src={
+                  data ? data.slice(-1)[0].path + '#toolbar=0' : 'Loading...'
+                }
                 type="application/pdf"
               />
             </object>
@@ -59,8 +62,8 @@ const Gazette = () => {
               Pour télécharger la gazette{' '}
               <a
                 className="underline text-blue-700"
-                href={data && data.slice(-1)[0][0]}
-                download={data && data.slice(-1)[0][1]}
+                href={data && data.slice(-1)[0].path}
+                download={data && data.slice(-1)[0].name}
               >
                 Cliquer ici{' '}
               </a>
@@ -83,7 +86,11 @@ const Gazette = () => {
             </div>
 
             <div className=" mt-9 border-t-2 border-quartary">
-              <DocumentUploadForm folder="Gazette" />
+              <DocumentUploadForm
+                folder="Gazette"
+                type="une gazette"
+                placeholder="GA N-X MMM YY"
+              />
             </div>
           </div>
         </div>
