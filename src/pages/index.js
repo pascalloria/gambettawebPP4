@@ -3,8 +3,7 @@ import ArticleCard from '../../components/ArticleCard/ArticleCard';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-const Index = (props) => {
-  console.log(props.articles);
+const Index = (props) => { 
   const router = useRouter();
   // Call this function whenever you want to
   // refresh props!

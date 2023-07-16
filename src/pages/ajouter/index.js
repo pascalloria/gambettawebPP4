@@ -101,26 +101,6 @@ const Ajouter = (props) => {
 
   // function
 
-  const handleUpload = async (folder) => {
-    try {
-      if (!selectFile) return;
-      const body = new FormData();
-      body.append('myDoc', selectFile);
-      body.append('folder', folder);
-      const response = await fetch('/api/documentUpload', {
-        method: 'POST',
-        body,
-      });
-      // recuperer le resultat du fetch
-      const res = await response.json();
-      // recuperer le chemin vers la photo
-      let path = split(res.newPath, '/').slice(2).join('/');
-      setImgPath(path);
-    } catch (error) {
-      console.log(error.response?.data);
-    }
-  };
-
   // Gerer le comportement lors de l'ecriture dans les inputs
   const inputChangeHandler = (event, id) => {
     const newInputs = { ...inputs };
@@ -147,17 +127,43 @@ const Ajouter = (props) => {
     e.preventDefault();
   };
 
-  const submitHandler = async () => {
+  const imageUploadAndSubmitHandler = async () => {
     if (!isLoading) {
-      handleUpload('uploads/');
-      if (imgPath) {
+      // image uploads
+      let path;
+
+      if (selectFile) {
+        try {
+          const body = new FormData();
+          body.append('myDoc', selectFile);
+          body.append('folder', 'uploads/');
+          const response = await fetch('/api/documentUpload', {
+            method: 'POST',
+            body,
+          });
+          // recuperer le resultat du fetch
+          const res = await response.json();
+          // recuperer le chemin vers la photo
+          path = split(res.newPath, '/').slice(2).join('/');
+          setImgPath(path);
+        } catch (error) {
+          console.log(error.response?.data);
+        }
+      } else {
+        path = 'Header.jpg';
+      }
+
+      // on verifie que l'upload c'est bien passé
+      if (path) {
+        // creation de l'article sur la BDD
+
         let newArticle = {
           title: inputs.title.value,
           slug: inputs.slug.value,
           author: inputs.Author.value,
           content: inputs.Content.value,
           resume: inputs.Resume.value,
-          imgPath: imgPath,
+          imgPath: path,
         };
         setIsLoading(true);
         setError(null);
@@ -213,8 +219,8 @@ const Ajouter = (props) => {
         ))}
         {/* Bouton de submit */}
         <button
-          className="border-4 bg-quartary rounded-xl py-2 px-3 hover:bg-primary "
-          onClick={submitHandler}
+          className="border-4 bg-quartary rounded-xl py-2 px-3 text-white hover:bg-secondary hover:text-black hover:border-black  disabled:bg-primary"
+          onClick={imageUploadAndSubmitHandler}
           type="submit"
           disabled={!valid}
         >
@@ -246,9 +252,18 @@ const Ajouter = (props) => {
           selectedImage={selectedImage}
           onChange={({ target }) => {
             if (target.files) {
-              const file = target.files[0];
-              setSelectedImage(URL.createObjectURL(file));
-              setSelectFile(file);
+              // determinier le type du fichier
+              let type = split(target.files[0].type, '/')[0];
+              // verifier si le fichier selection est une image
+              if (type === 'image') {
+                const file = target.files[0];
+                setSelectedImage(URL.createObjectURL(file));
+                setSelectFile(file);
+              } else {
+                console.log("Ceci n'est pas une image");
+                setSelectedImage('');
+                setSelectFile();
+              }
             }
           }}
         />
