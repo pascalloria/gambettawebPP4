@@ -13,7 +13,6 @@ export const config = {
 export default async (req, res) => {
   const data = await new Promise((resolve, reject) => {
     const form = new IncomingForm();
-    console.log(form)
     form.parse(req, (err, fields, files) => {
       // Recuperons l'extension du fichier
       let ext = split(files.myDoc[0].mimetype, '/')[1];

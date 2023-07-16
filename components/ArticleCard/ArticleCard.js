@@ -17,8 +17,8 @@ const ArticleCard = (props) => {
     const data = await response.json();
 
     if (response.ok) {
-      console.log(data.message);
-      setDeleted(deleted + 1);
+      console.log(data.message); 
+      props.onArticleDeleted();  
     } else {
       console.log(data.message);
     }

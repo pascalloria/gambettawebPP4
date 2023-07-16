@@ -1,12 +1,27 @@
 import { connectToDatabase } from '@/helpers/mongoBD';
 import ArticleCard from '../../components/ArticleCard/ArticleCard';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 const Index = (props) => {
+  console.log(props.articles);
+  const router = useRouter();
+  // Call this function whenever you want to
+  // refresh props!
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
 
+  const handleArticleDeleted = () => {
+    refreshData();
+  };
 
-  
   let articles = props.articles.map((article) => (
-    <ArticleCard key={article._id} article={article} />
+    <ArticleCard
+      key={article._id}
+      article={article}
+      onArticleDeleted={handleArticleDeleted}
+    />
   ));
 
   return (
@@ -28,7 +43,7 @@ const Index = (props) => {
           {/* Derniers Articles :  6 */}
           <h2 className="text-center font-bold text-3xl mt-5"> Actualités</h2>
 
-          {articles}
+          {articles && articles}
         </div>
         {/* Bloc Droite : Information sur la résidence */}
         <div className="col-span-12 my-3 lg:col-span-4 min-w-fit	 ">

@@ -150,34 +150,35 @@ const Ajouter = (props) => {
   const submitHandler = async () => {
     if (!isLoading) {
       handleUpload('uploads/');
+      if (imgPath) {
+        let newArticle = {
+          title: inputs.title.value,
+          slug: inputs.slug.value,
+          author: inputs.Author.value,
+          content: inputs.Content.value,
+          resume: inputs.Resume.value,
+          imgPath: imgPath,
+        };
+        setIsLoading(true);
+        setError(null);
+        // envoyer le nouveau projet sur l'API next
+        // creer un dossier "api" invisible pour l'utilisateur
+        const response = await fetch('/api/article', {
+          method: 'POST',
+          headers: {
+            'content-Type': 'application/json',
+          },
+          body: JSON.stringify(newArticle),
+        });
 
-      let newArticle = {
-        title: inputs.title.value,
-        slug: inputs.slug.value,
-        author: inputs.Author.value,
-        content: inputs.Content.value,
-        resume: inputs.Resume.value,
-        imgPath: imgPath,
-      };
-      setIsLoading(true);
-      setError(null);
-      // envoyer le nouveau projet sur l'API next
-      // creer un dossier "api" invisible pour l'utilisateur
-      const response = await fetch('/api/article', {
-        method: 'POST',
-        headers: {
-          'content-Type': 'application/json',
-        },
-        body: JSON.stringify(newArticle),
-      });
-
-      const data = await response.json();
-      if (!response.ok) {
-        setIsLoading(false);
-        setError(data.message || 'Une erreur est survenue');
-      } else {
-        setIsLoading(false);
-        router.replace('/article/' + data.projet.slug);
+        const data = await response.json();
+        if (!response.ok) {
+          setIsLoading(false);
+          setError(data.message || 'Une erreur est survenue');
+        } else {
+          setIsLoading(false);
+          router.replace('/article/' + data.projet.slug);
+        }
       }
     }
   };
