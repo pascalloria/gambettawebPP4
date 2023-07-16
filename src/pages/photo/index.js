@@ -67,18 +67,19 @@ const Photo = (props) => {
   // afficher les photos
   let gridPhoto;
   if (props.photos) {
-    gridPhoto = props.photos.map((photo, i) => (
-
-      (photo.cat === cat) && <div key={i}>
-        <a href={photo.path}>
-          <figure className="overflow-hidden max-h-80">
-            <img src={photo.path} alt={photo.title} />
-            <figcaption>{photo.title}</figcaption>
-          </figure>
-        </a>
-      </div>
-      
-    ));
+    gridPhoto = props.photos.map(
+      (photo, i) =>
+        photo.cat === cat && (
+          <div key={i}>
+            <a href={photo.path}>
+              <figure className="overflow-hidden max-h-80">
+                <img src={photo.path} alt={photo.title} />
+                <figcaption>{photo.title}</figcaption>
+              </figure>
+            </a>
+          </div>
+        )
+    );
   }
 
   return (
@@ -118,7 +119,9 @@ const Photo = (props) => {
 
         <button
           className="bg-quartary px-3 py-2 rounded mt-3 "
-          onClick={() => handleDocumentUpload('Photos/'+ catPhoto, newName, catPhoto)}
+          onClick={() =>
+            handleDocumentUpload('Photos/' + catPhoto, newName, catPhoto)
+          }
         >
           {isLoading ? "En cours d'envoie" : 'Envoyer'}
         </button>

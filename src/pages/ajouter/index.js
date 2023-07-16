@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { SpinnerDotted } from 'spinners-react';
+import { split } from 'postcss/lib/list';
 
 import Input from '../../../components/Input';
 import { checkValidity } from '@/helpers/utility';
@@ -14,8 +15,8 @@ const Ajouter = (props) => {
   const [error, setError] = useState();
   const router = useRouter();
   const [selectedImage, setSelectedImage] = useState('');
-  const [selectFile, setSelectFile] = useState(); 
-  
+  const [selectFile, setSelectFile] = useState();
+  const [imgPath, setImgPath] = useState('');
 
   // Définition des eléments du formulaire ainsi que leurs parametres
   const [inputs, setInputs] = useState({
@@ -100,16 +101,21 @@ const Ajouter = (props) => {
 
   // function
 
-  const handleUpload = async () => {
+  const handleUpload = async (folder) => {
     try {
       if (!selectFile) return;
       const body = new FormData();
-      body.append('myImage', selectFile);
-      const response = await fetch('/api/imageUpload', {
+      body.append('myDoc', selectFile);
+      body.append('folder', folder);
+      const response = await fetch('/api/documentUpload', {
         method: 'POST',
         body,
       });
-   
+      // recuperer le resultat du fetch
+      const res = await response.json();
+      // recuperer le chemin vers la photo
+      let path = split(res.newPath, '/').slice(2).join('/');
+      setImgPath(path);
     } catch (error) {
       console.log(error.response?.data);
     }
@@ -143,7 +149,7 @@ const Ajouter = (props) => {
 
   const submitHandler = async () => {
     if (!isLoading) {
-      handleUpload();
+      handleUpload('uploads/');
 
       let newArticle = {
         title: inputs.title.value,
@@ -151,11 +157,8 @@ const Ajouter = (props) => {
         author: inputs.Author.value,
         content: inputs.Content.value,
         resume: inputs.Resume.value,
-        imgPath : "uploads/"+ selectFile.name
-        
-        
+        imgPath: imgPath,
       };
-      // console.log(newProject)
       setIsLoading(true);
       setError(null);
       // envoyer le nouveau projet sur l'API next
@@ -174,7 +177,6 @@ const Ajouter = (props) => {
         setError(data.message || 'Une erreur est survenue');
       } else {
         setIsLoading(false);
-        console.log(data.projet.slug);
         router.replace('/article/' + data.projet.slug);
       }
     }
@@ -246,10 +248,8 @@ const Ajouter = (props) => {
               const file = target.files[0];
               setSelectedImage(URL.createObjectURL(file));
               setSelectFile(file);
-           
             }
           }}
-          
         />
       </div>
 

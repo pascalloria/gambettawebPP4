@@ -2,6 +2,9 @@ import { connectToDatabase } from '@/helpers/mongoBD';
 import ArticleCard from '../../components/ArticleCard/ArticleCard';
 
 const Index = (props) => {
+
+
+  
   let articles = props.articles.map((article) => (
     <ArticleCard key={article._id} article={article} />
   ));

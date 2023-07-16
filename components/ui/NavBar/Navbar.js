@@ -51,13 +51,16 @@ const Navbar = () => {
               <Link href="/gazette">La gazette</Link>
             </li>
             <li className=" hover:text-primary">
-              <Link href="/conseil">Le Conseil au travail</Link>
+              <Link href="/conseil">Le Conseil</Link>
             </li>
             <li className=" hover:text-primary">
               <Link href="/photo">Photos</Link>
             </li>
             <li className=" hover:text-primary">
               <Link href="/contact">Contact</Link>
+            </li>
+            <li className=" hover:text-primary">
+              <Link href="/ajouter">Ajouter</Link>
             </li>
           </ul>
           <button

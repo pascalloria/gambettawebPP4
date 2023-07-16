@@ -13,7 +13,7 @@ export const config = {
 export default async (req, res) => {
   const data = await new Promise((resolve, reject) => {
     const form = new IncomingForm();
-
+    console.log(form)
     form.parse(req, (err, fields, files) => {
       // Recuperons l'extension du fichier
       let ext = split(files.myDoc[0].mimetype, '/')[1];
@@ -28,7 +28,7 @@ export default async (req, res) => {
 
       // Deplacons le fichier
       var oldPath = files.myDoc[0].filepath;
-      var newPath = `./public/${fields.folder[0]}/${fields.newName[0]}.${ext}`;
+      var newPath = `./public/${fields.folder[0]}/${fields.newName ?fields.newName[0]:files.myDoc[0].originalFilename}.${ext}`;
       mv(oldPath, newPath, function (err) {});
 
       // Renvoyons le code de succes et les données
