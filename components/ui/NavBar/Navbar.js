@@ -63,9 +63,14 @@ const Navbar = (props) => {
             <li className=" hover:text-primary">
               <Link href="/contact">Contact</Link>
             </li>
-            <li className=" hover:text-primary">
-              <Link href="/ajouter">Ajouter</Link>
-            </li>
+            {props.user &&              
+              props.user.roles.includes("Modo") &&
+              
+              (<li className=" hover:text-primary">
+                <Link href="/ajouter">Ajouter</Link>
+              </li>) }
+          
+            
           </ul>
 
           {/* Menu Utilisateur  */}

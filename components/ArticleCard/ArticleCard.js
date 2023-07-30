@@ -52,13 +52,14 @@ const ArticleCard = (props) => {
           <div className="block text-xs  text-gray-700 ms-5 italic ">
             Ecrit le {dateCreate}
           </div>
-
+          {props.user &&              
+              props.user.roles.includes("Modo") &&(
           <button
             className=" inline-block ml-auto bg-primary py-2 px-3 rounded-lg hover:bg-tertiaire hover:text-white  text-center text-xs md:text-base"
             onClick={handleDeleteArticle}
           >
             delete
-          </button>
+          </button>)}
 
           <div className=" inline-block ml-auto bg-primary py-2 px-3 rounded-lg hover:bg-tertiaire hover:text-white  text-center text-xs md:text-base">
             <Link href={'/article/' + props.article.slug}>Lire l'article</Link>

@@ -1,11 +1,8 @@
 import DocumentUploadForm from '../../../components/DocumentUpload/DocumentUploadForm';
 import { buildDataSWR } from '@/helpers/folderFilesFetcher';
+import { getSession } from 'next-auth/react';
 
-
-const Gazette = () => {
-  
-  
-
+const Gazette = (props) => {
   // Recuper les fichier présent dans le dossier CR et construire un tableau avec leur URL
   let docs;
   const { data } = buildDataSWR('Ressources/Gazette');
@@ -84,14 +81,15 @@ const Gazette = () => {
                 {data && docs}
               </ul>
             </div>
-
-            <div className=" mt-9 border-t-2 border-quartary">
-              <DocumentUploadForm
-                folder="Ressources/Gazette"
-                type="une gazette"
-                placeholder="GA N-X MMM YY"
-              />
-            </div>
+            {props.user && props.user.roles.includes('Modo') && (
+              <div className=" mt-9 border-t-2 border-quartary">
+                <DocumentUploadForm
+                  folder="Ressources/Gazette"
+                  type="une gazette"
+                  placeholder="GA N-X MMM YY"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -100,3 +98,17 @@ const Gazette = () => {
 };
 
 export default Gazette;
+
+export async function getServerSideProps(context) {
+  let user = null;
+  const session = await getSession({ req: context.req });
+  if (session) {
+    user = session.user;
+  }
+
+  return {
+    props: {
+      user: user,
+    },
+  };
+}

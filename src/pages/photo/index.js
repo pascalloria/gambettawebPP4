@@ -3,6 +3,7 @@ import { buildDataSWR } from '@/helpers/folderFilesFetcher';
 import { connectToDatabase } from '@/helpers/mongoBD';
 import ImageUploadFrom from '../../../components/ImageUpload/ImageUploadForm';
 import { split } from 'postcss/lib/list';
+import { getSession } from 'next-auth/react';
 
 const Photo = (props) => {
   // State
@@ -85,6 +86,8 @@ const Photo = (props) => {
   return (
     <div className="container">
       <h2 className="text-3xl font-semibold text-center"> Photos </h2>
+      
+      {props.user && props.user.roles.includes('Modo') && (
       <div className="flex flex-col justify-center items-center ">
         <ImageUploadFrom
           selectedImage={selectedImage}
@@ -125,7 +128,9 @@ const Photo = (props) => {
         >
           {isLoading ? "En cours d'envoie" : 'Envoyer'}
         </button>
-      </div>
+      </div>)}
+
+
 
       <div className=" border-t-4 mt-4  pt-4 border-quartary">
         <button
@@ -163,8 +168,13 @@ const Photo = (props) => {
 
 export default Photo;
 
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
   let photos;
+  let user = null;
+  const session = await getSession({ req: context.req });
+  if (session) {
+    user = session.user;
+  }
 
   try {
     const clientDB = await connectToDatabase();
@@ -180,8 +190,8 @@ export async function getStaticProps() {
   return {
     props: {
       photos: JSON.parse(JSON.stringify(photos)),
-    },
-    // Gestion Static Incrementabel pour reactulisé tout le X s vis a vis de la BDD
-    revalidate: 3600,
+      user: user,    
+    },   
   };
 }
+

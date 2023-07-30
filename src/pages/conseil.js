@@ -1,7 +1,8 @@
 import { buildDataSWR } from '@/helpers/folderFilesFetcher';
 import DocumentUploadForm from '../../components/DocumentUpload/DocumentUploadForm';
+import { getSession } from 'next-auth/react';
 
-const Conseil = () => {
+const Conseil = (props) => {
   let commissions = [
     [
       'TRAVAUX',
@@ -129,13 +130,14 @@ const Conseil = () => {
                 {data && docs}
               </ul>
             </div>
+            {props.user && props.user.roles.includes('Modo') && (
             <div className=" mt-9 border-t-2 border-quartary">
               <DocumentUploadForm
                 folder="Ressources/CR"
                 type="un compte rendu"
                 placeholder="AA_MM_JJ TITRE"
               />
-            </div>
+            </div>)}
           </div>
         </div>
       </div>
@@ -144,3 +146,19 @@ const Conseil = () => {
 };
 
 export default Conseil;
+
+
+export async function getServerSideProps(context) {
+  let user = null;
+  const session = await getSession({ req: context.req });
+  if (session) {
+    user = session.user;
+  }
+
+  return {
+    props: {
+      user: user,
+    },
+  };
+}
+
