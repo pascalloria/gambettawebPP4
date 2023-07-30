@@ -4,7 +4,7 @@ import { ObjectId } from 'mongodb';
 export default async function handler(req, res) {
   if (req.method == 'POST') {
     const { title, slug, author, content, resume, imgPath } = req.body;
-   console.log(req.body)
+    console.log(req.body);
     // verifier que tous les champs soit rempli
     if (!title || !slug || !author || !content || !resume) {
       res.status(422).json({ message: 'Champ du formulaire manquant' });
@@ -33,6 +33,60 @@ export default async function handler(req, res) {
     const db = clientMongoDB.db();
     try {
       await db.collection('Articles').insertOne(newArticle);
+    } catch (error) {
+      clientMongoDB.close();
+      res.status(500).json({ message: 'Un probleme est survenue' });
+      return;
+    }
+
+    clientMongoDB.close();
+    res.status(201).json({
+      message: 'projet ajouté avec succés',
+      projet: newArticle,
+    });
+  } else if (req.method == 'PUT') {
+    const { title, slug, author, content, resume, imgPath } = req.body;
+    console.log(req.body);
+    // verifier que tous les champs soit rempli
+    if (!title || !slug || !author || !content || !resume) {
+      res.status(422).json({ message: 'Champ du formulaire manquant' });
+      return;
+    }
+
+    let { id } = req.query;
+
+    // Vérifier que l'identifiant est présent
+    if (!id) {
+      res
+        .status(422)
+        .json({ message: 'Champ "id" manquant dans la requête PUT' });
+      return;
+    }
+
+    id = new ObjectId(id);
+
+    // stocker le nouveau projet
+    const newArticle = {
+      title,
+      slug,
+      author,
+      content,
+      resume,
+      dateCreate: new Date(),
+      imgPath: imgPath ? imgPath : 'Header.jpg',
+    };
+
+    // connextion a mongoDB
+    let clientMongoDB;
+    try {
+      clientMongoDB = await connectToDatabase();
+    } catch (error) {
+      res.status(500).json({ message: 'Connection impossible a la database' });
+      return;
+    }
+    const db = clientMongoDB.db();
+    try {
+      await db.collection('Articles').findOneAndReplace({ _id: id },{...newArticle});
     } catch (error) {
       clientMongoDB.close();
       res.status(500).json({ message: 'Un probleme est survenue' });

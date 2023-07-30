@@ -2,6 +2,7 @@ import { connectToDatabase } from '@/helpers/mongoBD';
 import { Parser } from 'html-to-react';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Slug = (props) => {
   const { title, content, author, imgPath, dateCreate, slug, resume } =
@@ -9,6 +10,24 @@ const Slug = (props) => {
   const htmlParser = new Parser();
   let dateCreateFormated = new Date(dateCreate).toLocaleDateString('fr');
 
+  const handleDeleteArticle = async () => {
+    const response = await fetch('/api/article?id=' + props.article._id, {
+      method: 'DELETE',
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      console.log(data.message);
+      props.onArticleDeleted();
+    } else {
+      console.log(data.message);
+    }
+  };
+
+  const handleEditArticle = async ()=> {
+    const response = await fetch("/api/article?id="+ props.article)
+  }
   
   return (
     <div className="container">
@@ -22,12 +41,17 @@ const Slug = (props) => {
           height={600}
         />
         <div className="mt-5">{htmlParser.parse(content)}</div>
-        <div className="mt-4 pt-2 border-t-2 border-quartary">
+        <div className="flex items-center mt-4 pt-2 border-t-2 border-quartary">
           {' '}
           <span className="italic text-sm">
             Ecrit le {dateCreateFormated} par{' '}
           </span>{' '}
-          <span className="font-bold">{author}</span>
+          <span className="ms-5 font-bold">{author}</span>
+          <div className=' ml-auto'>
+            <Link className='bg-quartary hover:text-secondary px-2 py-1 rounded hover:bg-primary'  href={"/editer/"+ slug }> Editer </Link>
+            <button className='bg-quartary  hover:text-secondary px-2 py-1 rounded hover:bg-primary' onClick={handleDeleteArticle}> Supprimer</button>
+          </div>
+          
         </div>
       </div>
     </div>

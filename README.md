@@ -6,11 +6,11 @@
 - [x] Supprimer un Article
 - [x] Systeme de log des Users
 - [x] Gestion des droits sur les routes
-- [ ] Forum
+- [x] Page admin !
 - [ ] Fonction edition d'article
-- [ ] Page admin !
-- [ ] Page Profil 
 - [ ] Gerer les notification avec toast
+- [ ] Forum
+- [ ] Page Profil 
 - [ ] Commenter le code
 - [ ] Design
 
@@ -22,5 +22,6 @@ Technologie use :
 - TailwindCSS
 - NextAuth
 - html-to-react
+- toast
 
 ---
