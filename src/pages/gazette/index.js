@@ -1,6 +1,6 @@
-import DocumentUploadForm from '../../../components/DocumentUpload/DocumentUploadForm';
 import { buildDataSWR } from '@/helpers/folderFilesFetcher';
 import { getSession } from 'next-auth/react';
+import AddGazette from '../../../components/Admin/AddGazette/AddGazette';
 
 const Gazette = (props) => {
   // Recuper les fichier présent dans le dossier CR et construire un tableau avec leur URL
@@ -73,7 +73,8 @@ const Gazette = (props) => {
           className=" col-span-12 my-3 xl:col-span-3  lg:col-span-4 min-w-fit	 "
         >
           <div className="sticky top-20">
-            <div className=" border-soldid border-2 border-black shadow-xl  shadow-black rounded-lg p-3 flex flex-col justify-center text-xl">
+            {props.user && props.user.roles.includes('Modo') && <AddGazette />}
+            <div className="mt-5 border-soldid border-2 border-black shadow-xl  shadow-black rounded-lg p-3 flex flex-col justify-center text-xl">
               <h2 className="text-2xl font-semibold">Anciens Numéros</h2>
 
               <ul className="list-disc list-inside ml-2">
@@ -81,15 +82,6 @@ const Gazette = (props) => {
                 {data && docs}
               </ul>
             </div>
-            {props.user && props.user.roles.includes('Modo') && (
-              <div className=" mt-9 border-t-2 border-quartary">
-                <DocumentUploadForm
-                  folder="Ressources/Gazette"
-                  type="une gazette"
-                  placeholder="GA N-X MMM YY"
-                />
-              </div>
-            )}
           </div>
         </div>
       </div>

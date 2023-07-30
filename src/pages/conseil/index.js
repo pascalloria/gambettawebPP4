@@ -1,6 +1,7 @@
 import { buildDataSWR } from '@/helpers/folderFilesFetcher';
 import DocumentUploadForm from '../../../components/DocumentUpload/DocumentUploadForm';
 import { getSession } from 'next-auth/react';
+import AddCR from '../../../components/Admin/AddCR/AddCR';
 
 const Conseil = (props) => {
   let commissions = [
@@ -123,6 +124,8 @@ const Conseil = (props) => {
           className="col-span-12 lg:col-span-4 text-center mt-3 min-w-fit"
         >
           <div className="sticky top-20">
+            {props.user && props.user.roles.includes('Modo') && <AddCR />}
+
             <div className=" border-soldid border-2 border-black shadow-xl  shadow-black	 rounded-lg p-3 flex flex-col justify-center text-xl">
               <h2 className="font-bold text-2xl mb-1">Compte Rendu</h2>
               <ul className="list-disc list-inside ml-2">
@@ -130,14 +133,6 @@ const Conseil = (props) => {
                 {data && docs}
               </ul>
             </div>
-            {props.user && props.user.roles.includes('Modo') && (
-            <div className=" mt-9 border-t-2 border-quartary">
-              <DocumentUploadForm
-                folder="Ressources/CR"
-                type="un compte rendu"
-                placeholder="AA_MM_JJ TITRE"
-              />
-            </div>)}
           </div>
         </div>
       </div>
@@ -146,7 +141,6 @@ const Conseil = (props) => {
 };
 
 export default Conseil;
-
 
 export async function getServerSideProps(context) {
   let user = null;
@@ -161,4 +155,3 @@ export async function getServerSideProps(context) {
     },
   };
 }
-

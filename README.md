@@ -10,9 +10,9 @@
 - [ ] Fonction edition d'article
 - [ ] Page admin !
 - [ ] Page Profil 
-- [ ]
-- [ ]
-- [ ]
+- [ ] Gerer les notification avec toast
+- [ ] Commenter le code
+- [ ] Design
 
 ---
 

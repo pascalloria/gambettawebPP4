@@ -22,22 +22,21 @@ const UserMenu = (props) => {
   return (
     <div className="relative">
       <button
-        className="text-secondary  text-xl font-semibold	pb-1   md:text-2xl  lg:text-3xl' +
-              show inline-flex items-center "
+        className="text-secondary  text-xl font-semibold	pb-1   md:text-2xl  lg:text-3xl inline-flex items-center "
         onClick={clickUserMenuHandler}
       >
         {props.user ? props.user.name : 'Connection'}
         <svg
-          class="w-4 h-4 ml-2"
+          className="w-4 h-4 ml-2"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="M19 9l-7 7-7-7"
           ></path>
         </svg>
@@ -60,6 +59,10 @@ const UserMenu = (props) => {
               <li className="hover:text-quartary  ">
                 <Link href="/profil">Profil</Link>
               </li>
+              {props.user.roles.includes('Modo') && (
+              <li className="hover:text-quartary  ">
+                <Link href="/admin">Administration</Link>
+              </li>) }
               <li className="hover:text-quartary  ">
                 <button onClick={onLogoutClicHandler}>Déconnection</button>
               </li>
