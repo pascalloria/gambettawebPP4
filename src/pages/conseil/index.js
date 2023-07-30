@@ -1,5 +1,5 @@
 import { buildDataSWR } from '@/helpers/folderFilesFetcher';
-import DocumentUploadForm from '../../components/DocumentUpload/DocumentUploadForm';
+import DocumentUploadForm from '../../../components/DocumentUpload/DocumentUploadForm';
 import { getSession } from 'next-auth/react';
 
 const Conseil = (props) => {

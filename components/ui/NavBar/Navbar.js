@@ -74,7 +74,10 @@ const Navbar = (props) => {
           </ul>
 
           {/* Menu Utilisateur  */}
-          <UserMenu user={props.user} />
+          <div className='ms-10 lg:ms-0'>
+             <UserMenu user={props.user} />
+          </div>
+         
 
           <button
             className="ml-auto rounded p-4 bg-tertiaire sm:hidden"
