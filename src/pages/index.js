@@ -22,6 +22,7 @@ const Index = (props) => {
       key={article._id}
       article={article}
       onArticleDeleted={handleArticleDeleted}
+      user = {props.user}
     />
   ));
 
@@ -29,7 +30,6 @@ const Index = (props) => {
 
   return (
     <div className="container">
-  { props.user && (<p>Bonjour {props.user.name}</p> )}
     
       <div className="grid grid-cols-12 lg:gap-10">
         {/* Bloc Gauche : Presentation + Articles */}
