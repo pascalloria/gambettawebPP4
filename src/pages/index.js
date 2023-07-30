@@ -3,7 +3,9 @@ import ArticleCard from '../../components/ArticleCard/ArticleCard';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-const Index = (props) => { 
+import { getSession } from 'next-auth/react';
+
+const Index = (props) => {
   const router = useRouter();
   // Call this function whenever you want to
   // refresh props!
@@ -23,8 +25,12 @@ const Index = (props) => {
     />
   ));
 
+ 
+
   return (
     <div className="container">
+  { props.user && (<p>Bonjour {props.user.name}</p> )}
+    
       <div className="grid grid-cols-12 lg:gap-10">
         {/* Bloc Gauche : Presentation + Articles */}
         <div id="actualite" className="col-span-12 mt-3 text-lg lg:col-span-8 ">
@@ -113,6 +119,11 @@ export default Index;
 
 export async function getServerSideProps(context) {
   let articles;
+  let user = null;
+  const session = await getSession({ req: context.req });
+  if (session) {
+    user = session.user;
+  }
 
   try {
     // Connextion a MongoDB
@@ -133,6 +144,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       articles: JSON.parse(JSON.stringify(articles)),
+      user: user,
     },
   };
 }

@@ -7,6 +7,7 @@ import { split } from 'postcss/lib/list';
 import Input from '../../../components/Input';
 import { checkValidity } from '@/helpers/utility';
 import ImageUploadForm from '../../../components/ImageUpload/ImageUploadForm';
+import ErrorMessage from '../../../components/ui/Error/Error';
 
 const Ajouter = (props) => {
   // state

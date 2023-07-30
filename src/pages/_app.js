@@ -1,23 +1,20 @@
 import '@/style/default.css';
 import Head from 'next/head';
-
-
+import { SessionProvider } from 'next-auth/react';
 
 // Components
-import Layout from '../../components/ui/Layout/Layout';
+import Layout from '../../components/ui/layout/Layout';
 
-export default function App({
-  Component,
-  pageProps: { session, ...pageProps },
-}) {
+export default function App({ Component, pageProps }) {
+  const { session, ...restPageProps } = pageProps;
   return (
-
+    <SessionProvider session={session}>
       <Layout>
-        <Head>          
-          <title>Site des Copropriétaire de la résidence GAMBETTA</title>            
+        <Head>
+          <title>Site des Copropriétaire de la résidence GAMBETTA</title>
         </Head>
         <Component {...pageProps} />
       </Layout>
-   
+    </SessionProvider>
   );
 }
