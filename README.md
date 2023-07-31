@@ -8,7 +8,7 @@
 - [x] Gestion des droits sur les routes
 - [x] Page admin !
 - [x] Fonction edition d'article
-- [ ] Installer et parameter Tiny
+- [x] Installer et parameter ReactQuill
 - [ ] Gerer les notification avec toast
 - [ ] Forum
 - [ ] Page Profil 
@@ -24,6 +24,6 @@ Technologie use :
 - NextAuth
 - html-to-react
 - toast
-- tiny
+- ReactQuill
 
 ---

@@ -2,6 +2,7 @@ import { connectToDatabase } from '@/helpers/mongoBD';
 import ArticleCard from '../../components/ArticleCard/ArticleCard';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { toast } from "react-toastify";
 
 import { getSession } from 'next-auth/react';
 
@@ -12,9 +13,10 @@ const Index = (props) => {
   const refreshData = () => {
     router.replace(router.asPath);
   };
-
+ 
   const handleArticleDeleted = () => {
     refreshData();
+    toast("Article supprimé avec succés.")
   };
 
   let articles = props.articles.map((article) => (
@@ -24,9 +26,7 @@ const Index = (props) => {
       onArticleDeleted={handleArticleDeleted}
       user = {props.user}
     />
-  ));
-
- 
+  ));  
 
   return (
     <div className="container">
