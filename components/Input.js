@@ -1,7 +1,16 @@
+// Importez dynamic depuis Next.js
+import dynamic from 'next/dynamic';
+ // Chargez "react-quill" côté client
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false }); 
+
+import 'react-quill/dist/quill.snow.css';
+
 const Input = (props) => {
   // Composant qui gere les différents type d'inputs utilisé dans les formulaires de ce sites.
   let inputElement;
-  const inputClasses = ["py-2 px-3 border-5 border-black rounded-lg p-4 w-full"];
+  const inputClasses = [
+    'py-2 px-3 border-5 border-black rounded-lg p-4 w-full',
+  ];
 
   // Permet d'ajouter la classe invalid si un input ne correspond pas au régle editer dans le formulaire
   if (!props.valid && props.touched) {
@@ -23,13 +32,16 @@ const Input = (props) => {
       break;
     case 'textarea':
       inputElement = (
-        <textarea          
+        <>
+          {/* <textarea          
           {...props.config}
           value={props.value}
           onChange={props.changed}
           className={inputClasses} 
           id={props.id}
-        ></textarea>
+        ></textarea> */}
+          <ReactQuill value={props.value} onChange={props.changedQuill} />
+        </>
       );
       break;
     case 'select':
@@ -60,7 +72,9 @@ const Input = (props) => {
       <div className="p-2">{inputElement}</div>
 
       {/* Affiche le message prévue en cas de non respect de regles du formulaire */}
-      {!props.valid && props.touched ? <p className="text-red-500">{props.errorMessage}</p> : null}
+      {!props.valid && props.touched ? (
+        <p className="text-red-500">{props.errorMessage}</p>
+      ) : null}
     </div>
   );
 };

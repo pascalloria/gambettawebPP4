@@ -38,7 +38,7 @@ const ArticleBody = (props) => {
       },
       value: article ? article.title : '',
       label: 'Titre',
-      valid: article ? true:false,
+      valid: article ? true : false,
       validation: {
         required: true,
         minLength: 6,
@@ -54,7 +54,7 @@ const ArticleBody = (props) => {
       },
       value: article ? article.slug : '',
       label: 'Slug',
-      valid: article ? true:false,
+      valid: article ? true : false,
       validation: { required: true, minLength: 4 },
       errorMessage: 'Le Slug doit comporté au minimum 4 caractéres',
       touched: false,
@@ -67,7 +67,7 @@ const ArticleBody = (props) => {
       },
       value: article ? article.author : '',
       label: 'Auteur',
-      valid: article ? true:false,
+      valid: article ? true : false,
       validation: { required: true, minLength: 3 },
       errorMessage: "L'auteur Client doit comporté au minimum 3 caractéres",
       touched: false,
@@ -82,7 +82,7 @@ const ArticleBody = (props) => {
       },
       value: article ? article.content : '',
       label: 'Contenu',
-      valid: article ? true:false,
+      valid: article ? true : false,
       validation: {
         required: true,
         minLength: 120,
@@ -99,12 +99,12 @@ const ArticleBody = (props) => {
       },
       value: article ? article.resume : '',
       label: 'Résumé',
-      valid: article ? true:false,
+      valid: article ? true : false,
       validation: {
         required: true,
-        maxLength: 250,
+        maxLength: 350,
       },
-      errorMessage: 'Le message de doit pas avoir plus de 250 caractères ',
+      errorMessage: 'Le message de doit pas avoir plus de 350 caractères ',
       touched: false,
     },
   });
@@ -134,6 +134,23 @@ const ArticleBody = (props) => {
   // empeche la redirection lors de l'envoie du formulaire
   const formHandler = (e) => {
     e.preventDefault();
+  };
+
+  //fonction pour gérer le changement du contenu de l'éditeur
+  const handleEditorChange = (value, id) => {
+    const newInputs = { ...inputs };
+    newInputs[id].value = value;
+    newInputs[id].touched = true;
+    // vérification de la valeur
+    newInputs[id].valid = checkValidity(value, newInputs[id].validation);
+    setInputs(newInputs);
+
+    // Vérification du formulaire
+    let formIsValid = true;
+    for (let input in newInputs) {
+      formIsValid = newInputs[input].valid && formIsValid;
+    }
+    setValid(formIsValid);
   };
 
   const imageUploadAndSubmitHandler = async () => {
@@ -272,7 +289,7 @@ const ArticleBody = (props) => {
   // pour chaque élement on appelle le composant Input et on lui passe les Props
   let form = (
     <>
-      <form className="mt-5 p-5 mx-auto" onSubmit={(e) => formHandler(e)}>
+      <form className="mt-5 p-5 mx-auto max-w-full  lg:w-2/3	" onSubmit={(e) => formHandler(e)}>
         {error && <ErrorMessage error={error} />}
         {formElementsArray.map((formElement) => (
           <Input
@@ -286,6 +303,7 @@ const ArticleBody = (props) => {
             touched={formElement.config.touched}
             errorMessage={formElement.config.errorMessage}
             changed={(e) => inputChangeHandler(e, formElement.id)}
+            changedQuill={(e) => handleEditorChange(e, formElement.id)}
           />
         ))}
         {/* Bouton de submit */}
@@ -318,7 +336,7 @@ const ArticleBody = (props) => {
   return (
     <div className="container">
       <Head>
-        <title>{props.mode} un Article</title>
+        <title>{props.mode} un Article</title>       
       </Head>
 
       <h1 className="text-center text-3xl font-semibold">

@@ -7,7 +7,8 @@
 - [x] Systeme de log des Users
 - [x] Gestion des droits sur les routes
 - [x] Page admin !
-- [ ] Fonction edition d'article
+- [x] Fonction edition d'article
+- [ ] Installer et parameter Tiny
 - [ ] Gerer les notification avec toast
 - [ ] Forum
 - [ ] Page Profil 
@@ -23,5 +24,6 @@ Technologie use :
 - NextAuth
 - html-to-react
 - toast
+- tiny
 
 ---

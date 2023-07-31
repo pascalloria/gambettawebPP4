@@ -26,3 +26,33 @@
   padding: 0.5em 0.5em;
   text-align: center;
 }
+/* Remplacez "#ffffff" par la couleur de fond souhaitée */
+.ql-container {
+  background-color: #ffffff;
+  
+}
+
+/* Remplacez "#f8f8f8" par la couleur de fond souhaitée pour la barre d'outils */
+.ql-toolbar {
+  background-color: #f8f8f8;
+}
+
+
+/* Permet de definir un style pour h1 à h3 */
+@tailwind base;
+
+@layer base {
+  h1 {
+    @apply text-3xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-xl;
+  }  
+}
+
+@tailwind components;
+
+@tailwind utilities;

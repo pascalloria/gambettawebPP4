@@ -41,9 +41,9 @@ const ArticleCard = (props) => {
             {props.article.title}
           </div>
 
-          <p className="text-gray-700 text-base mt-2">
+          <div className="text-gray-700 text-base mt-2">
             {htmlParser.parse(props.article.resume)}
-          </p>
+          </div>
         </div>
         <div className="px-6 pt-4 pb-2 flex items-center	">
           <div className="block text-sm font-semibold text-gray-700">
