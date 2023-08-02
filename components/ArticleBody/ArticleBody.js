@@ -308,7 +308,7 @@ const ArticleBody = (props) => {
         ))}
         {/* Bouton de submit */}
         <button
-          className="border-4 bg-quartary rounded-xl py-2 px-3 text-white hover:bg-secondary hover:text-black hover:border-black  disabled:bg-primary"
+          className="border-4 bg-quartary rounded-lg py-2 px-3 text-black hover:bg-tertiaire hover:text-white   disabled:bg-primary"
           onClick={
             props.mode == 'Editer'
               ? imageUploadAndEditSubmitHandler

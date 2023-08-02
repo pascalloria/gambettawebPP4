@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
 import UserMenu from '../UserMenu/UserMenu';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fa0, faBars } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = (props) => {
   // State
@@ -74,15 +76,15 @@ const Navbar = (props) => {
           </ul>
 
           {/* Menu Utilisateur  */}
-          <div className='ms-10 lg:ms-0'>
+          <div className={collapse ? "ms-0":"ms-10"+ ' lg:ms-0'}>
              <UserMenu user={props.user} />
           </div>
          
 
           <button
-            className="ml-auto rounded p-4 bg-tertiaire sm:hidden"
+            className="ml-auto rounded  sm:hidden"
             onClick={handleCollapse}
-          ></button>
+          ><FontAwesomeIcon icon={faBars}/></button>
         </div>
       </div>
     </nav>

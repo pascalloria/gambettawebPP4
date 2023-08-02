@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Parser } from 'html-to-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBook, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const ArticleCard = (props) => {
   const dateCreate = new Date(props.article.dateCreate).toLocaleDateString(
@@ -50,19 +52,32 @@ const ArticleCard = (props) => {
             {props.article.author}
           </div>
           <div className="block text-xs  text-gray-700 ms-5 italic ">
-            Ecrit le {dateCreate}
+            <span className="hidden lg:inline-block">Ecrit le</span>
+            {dateCreate}
           </div>
-          {props.user && props.user.roles.includes('Modo') && (
-            <button
-              className=" inline-block ml-auto bg-primary py-2 px-3 rounded-lg hover:bg-tertiaire hover:text-white  text-center text-xs md:text-base"
-              onClick={handleDeleteArticle}
-            >
-              Supprimer
-            </button>
-          )}
 
-          <div className=" inline-block ml-auto bg-primary py-2 px-3 rounded-lg hover:bg-tertiaire hover:text-white  text-center text-xs md:text-base">
-            <Link href={'/article/' + props.article.slug}>Lire l'article</Link>
+          <div className="ml-auto">
+            {props.user && props.user.roles.includes('Modo') && (
+              <button
+                className="inline-block ml-auto me-3 bg-quartary py-2 px-3 rounded-lg hover:bg-tertiaire hover:text-white  text-center text-xs md:text-base"
+                onClick={handleDeleteArticle}
+                title="Supprimer"
+              >
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  className="lg:me-2 "
+                ></FontAwesomeIcon>
+                <span className="hidden lg:inline-block">Supprimer</span>
+              </button>
+            )}
+
+            <div className=" inline-block ml-auto bg-quartary py-2 px-3 rounded-lg hover:bg-tertiaire hover:text-white  text-center text-xs md:text-base">
+              <Link href={'/article/' + props.article.slug}>
+                {' '}
+                <FontAwesomeIcon icon={faBook} />{' '}
+                <span className="hidden lg:inline-block">Lire l'article</span>{' '}
+              </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -20,10 +20,13 @@
 Technologie use :
 
 - NextJS
-- TailwindCSS
-- NextAuth
-- html-to-react
-- toast
-- ReactQuill
+- TailwindCSS : Gere le Style
+- NextAuth : Gere l'authentification
+- html-to-react : Parse le HTML pour l'afficher correctement
+- React-Toastify : Notification
+- ReactQuill : Rich Text Editor
+- bcryptjs : Permet de Hasher les MDP
+- formidable : Perment de personaliser le body envoyer en requete
 
+BDD : MongoDbCloud
 ---

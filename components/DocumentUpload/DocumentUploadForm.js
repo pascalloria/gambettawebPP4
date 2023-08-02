@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const DocumentUploadForm = (props) => {
   //state
@@ -8,14 +9,17 @@ const DocumentUploadForm = (props) => {
 
   // function
 
+  // Stocker le nom du document
   const nameHandler = (event) => {
     setNewName(event.target.value);
   };
 
+  // Uploader le document
   const handleDocumentUpload = async () => {
     try {
       if (!selectFile) return;
       setIsLoading(true);
+      // Transmettre des informations a l'api
       const body = new FormData();
       body.append('myDoc', selectFile);
       body.append('folder', props.folder);
@@ -24,12 +28,18 @@ const DocumentUploadForm = (props) => {
         method: 'POST',
         body,
       });
-    } catch (error) {}
+      // envoyé une notification de succés
+      toast('Document envoyé avec succés.');
+      // Vider l'input
+      document.querySelector('#name').value = '';
+    } catch (error) {
+      toast('Un probléme est survenue : ' + error.message);
+    }
     setIsLoading(false);
   };
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center ">
       <h2 className="text-2xl p-2 mx-auto font-semibold text-center">
         {' '}
         Ajouter {props.type}
@@ -47,7 +57,7 @@ const DocumentUploadForm = (props) => {
             }
           }}
         />
-        <div className="w-full mx-auto rounded p-6 flex items-center justify-center border-4 cursor-pointer">
+        <div className="w-full	break-all		 mx-auto rounded p-6 flex items-center justify-center border-4 cursor-pointer">
           {!selectFile ? 'Sélectionner un fichier' : selectFile.name}
         </div>
       </label>
@@ -64,7 +74,7 @@ const DocumentUploadForm = (props) => {
 
       <button
         onClick={handleDocumentUpload}
-        className=" mx-auto mt-3 py-2 rounded  px-3 text-2xl text-white bg-quartary hover:text-black disabled:bg-primary"
+        className=" mx-auto mt-3 py-2 rounded-lg  px-3 text-2xl text-black bg-quartary hover:text-white hover:bg-tertiaire disabled:bg-primary"
         disabled={newName ? false : true}
       >
         {isLoading ? "En cours d'envoie" : 'Envoyer'}

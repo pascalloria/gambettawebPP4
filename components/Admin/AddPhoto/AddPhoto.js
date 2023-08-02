@@ -89,7 +89,7 @@ const AddPhoto = (props) => {
       </div>
 
       <button
-        className="bg-quartary px-3 py-2 rounded mt-3 "
+        className="bg-quartary px-3 py-2 text-2xl rounded-lg mt-3 hover:bg-tertiaire hover:text-white "
         onClick={() =>
           handleDocumentUpload('Photos/' + catPhoto, newName, catPhoto)
         }

@@ -70,7 +70,7 @@ const Gazette = (props) => {
         {/* Encard ancien numéro */}
         <div
           id="gazette"
-          className=" col-span-12 my-3 xl:col-span-3  lg:col-span-4 min-w-fit	 "
+          className=" col-span-12  my-3 xl:col-span-3  lg:col-span-4 	 "
         >
           <div className="sticky top-20">
             {props.user && props.user.roles.includes('Modo') && <AddGazette />}
