@@ -71,6 +71,9 @@ const Navbar = (props) => {
               (<li className=" hover:text-primary">
                 <Link href="/ajouter">Ajouter</Link>
               </li>) }
+            <li className=" hover:text-primary">
+              <Link href="/forum">Forum</Link>
+            </li>
           
             
           </ul>
