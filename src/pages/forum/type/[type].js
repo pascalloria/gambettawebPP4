@@ -1,6 +1,7 @@
 import { connectToDatabase } from '@/helpers/mongoBD';
 import Link from 'next/link';
 import Head from 'next/head';
+import { getSession } from 'next-auth/react';
 
 const Forum = (props) => {
   let posts = props.posts;
@@ -29,12 +30,13 @@ const Forum = (props) => {
         <h1 className="text-3xl font-semibold mb-3">
           Catégorie : {props.type}
         </h1>
+        {props.user &&
         <Link
           href={'/forum/ajouter/' + props.type}
           className="bg-quartary px-2 py-1 rounded-lg text-black hover:bg-tertiaire hover:text-white"
         >
           Nouveau Sujet
-        </Link>
+        </Link>}
       </div>
 
       <ul className="mt-3"> {postShow}</ul>
@@ -47,6 +49,11 @@ export default Forum;
 export async function getServerSideProps(context) {
   let posts;
   let { params } = context;
+  let user = null;
+  const session = await getSession({ req: context.req });
+  if (session) {
+    user = session.user;
+  }
 
   try {
     // Connextion a MongoDB
@@ -64,6 +71,7 @@ export async function getServerSideProps(context) {
     props: {
       posts: JSON.parse(JSON.stringify(posts)),
       type: params.type,
+      user: user,
     },
   };
 }

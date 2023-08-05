@@ -31,30 +31,40 @@ const PostReply = (props) => {
     if (!response.ok) {
       console.log(data.message || 'Une erreur est survenue');
     } else {
-      console.log(data.message)
+      console.log(data.message);
       router.replace('/forum/' + props.slug);
     }
   };
 
-  replyShow = replys.map((reply, i) => (
-    reply &&
-    <li key={i}>
-      <div className="bg-white p-3 ms-8 border-b-2 border-dotted border-primary">
-        <div>{htmlParser.parse(reply.content)}</div>
-        <div className="flex mt-2 text-sm gap-2 justify-end">
-          <span className="font-medium">{reply.author}</span>
-          {/* date en version FR */}
-          <span>le {new Date(reply.dateCreate).toLocaleDateString('fr')}</span>
-          <button
-            className="bg-quartary hover:bg-tertiaire  hover:text-white px-1  rounded"
-            onClick={() => deleteReplyHandler(i)}
-          >
-            <FontAwesomeIcon icon={faTrashAlt} />
-          </button>
-        </div>
-      </div>
-    </li>
-  ));
+
+
+  replyShow = replys.map(
+    (reply, i) =>
+      reply && (
+        <li key={i}>
+          <div className="bg-white p-3 ms-8 border-b-2 border-dotted border-primary">
+            <div>{htmlParser.parse(reply.content)}</div>
+            <div className="flex mt-2 text-sm gap-2 justify-end">
+              <span className="font-medium">{reply.author} </span>
+              {/* date en version FR */}
+              <span>
+                le {new Date(reply.dateCreate).toLocaleDateString('fr')}
+              </span>
+              {props.user && 
+
+              (props.user.roles.includes("Modo") || props.user.name== reply.author) && 
+                  <button
+                    className="bg-quartary hover:bg-tertiaire  hover:text-white px-1  rounded"
+                    onClick={() => deleteReplyHandler(i)}
+                  >
+                    <FontAwesomeIcon icon={faTrashAlt} />
+                  </button>
+                }
+            </div>
+          </div>
+        </li>
+      )
+  );
 
   return <ul>{replyShow}</ul>;
 };

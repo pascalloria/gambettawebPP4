@@ -38,7 +38,7 @@ export default async function handler(req, res) {
     clientMongoDB.close();
     res.status(201).json({
       message: 'projet ajouté avec succés',
-      projet: newReply,
+      projet: {...newReply, slug}      
     });
   }
   if (req.method == 'PUT') {
