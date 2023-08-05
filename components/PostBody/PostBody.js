@@ -106,14 +106,12 @@ const PostBody = (props) => {
         type: props.type,
         author: props.author,
       };
-      console.log('post');
     } else {
       newPost = {
         content: inputs.content.value,
         slug: props.slug,
         author: props.author,
       };
-      console.log('Reply');
     }
 
     setIsLoading(true);

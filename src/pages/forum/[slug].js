@@ -18,8 +18,6 @@ const SlugPost = (props) => {
   let dateCreate = new Date(props.post.dateCreate).toLocaleDateString('fr');
   const router = useRouter();
 
-  console.log(props.user)
-
   const handleDeletePost = async () => {
     const response = await fetch('/api/post?id=' + props.post._id, {
       method: 'DELETE',
@@ -57,27 +55,26 @@ const SlugPost = (props) => {
         {props.user && (
           <div className="mt-2  text-end">
             {/* Autoriser l'edition et la suppresion Uniquement au Modo et a l'auteur */}
-            {(props.user.roles.includes("Modo") || props.user.name== props.post.author)  && (
-                <>
-                  <button
-                    className=" me-2 rounded-lg px-2 py-1 b-2  bg-quartary hover:bg-tertiaire hover:text-white"
-                    onClick={handleDeletePost}
-                  >
-                    <FontAwesomeIcon icon={faTrashAlt} />
-                    <span className="  ms-2 hidden lg:inline-block">
-                      Supprimer
-                    </span>
-                  </button>
-                  <button className="me-2 rounded-lg px-2 py-1 b-2  bg-quartary hover:bg-tertiaire hover:text-white  ">
-                    <Link href={'/forum/editer/' + props.post.slug}>
-                      <FontAwesomeIcon icon={faEdit} />
-                      <span className=" ms-2 hidden lg:inline-block">
-                        Editer
-                      </span>
-                    </Link>
-                  </button>{' '}
-                </>
-              )}
+            {(props.user.roles.includes('Modo') ||
+              props.user.name == props.post.author) && (
+              <>
+                <button
+                  className=" me-2 rounded-lg px-2 py-1 b-2  bg-quartary hover:bg-tertiaire hover:text-white"
+                  onClick={handleDeletePost}
+                >
+                  <FontAwesomeIcon icon={faTrashAlt} />
+                  <span className="  ms-2 hidden lg:inline-block">
+                    Supprimer
+                  </span>
+                </button>
+                <button className="me-2 rounded-lg px-2 py-1 b-2  bg-quartary hover:bg-tertiaire hover:text-white  ">
+                  <Link href={'/forum/editer/' + props.post.slug}>
+                    <FontAwesomeIcon icon={faEdit} />
+                    <span className=" ms-2 hidden lg:inline-block">Editer</span>
+                  </Link>
+                </button>{' '}
+              </>
+            )}
             <button className=" rounded-lg px-2 py-1 b-2  bg-quartary hover:bg-tertiaire hover:text-white  ">
               <Link href={'/forum/reply/' + props.post.slug}>
                 <FontAwesomeIcon icon={faReply} />
@@ -90,7 +87,11 @@ const SlugPost = (props) => {
         {/* Si il y a des réponse les afficher */}
         {props.post.replys.length > 0 && (
           <div className="border-t-2 border-primary mt-2">
-            <PostReply user={props.user}slug={props.post.slug} replys={props.post.replys} />
+            <PostReply
+              user={props.user}
+              slug={props.post.slug}
+              replys={props.post.replys}
+            />
           </div>
         )}
       </div>
