@@ -127,8 +127,7 @@ export default async function handler(req, res) {
       const result = await db.collection('Articles').deleteOne({ _id: id });
       if (result.deletedCount === 1) {
         res.status(200).json({ message: 'Article supprimé avec succès' });
-      } else {
-        res.status(404).json({ message: 'Article non trouvé' });
+      } else {        
         throw new Error('Article non trouvé');
         
       }
@@ -140,11 +139,7 @@ export default async function handler(req, res) {
       });
       return;
     }
-
-    clientMongoDB.close();
-    res.status(200).json({
-      message: 'Article supprimé avec succés',
-    });
+    clientMongoDB.close();   
   } else {
     res.status(505).json({
       message: 'Methode interdite',
