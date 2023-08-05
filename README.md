@@ -13,7 +13,7 @@
 - [x] Creation des Post et des reponse au post
 - [x] Edition et suppression des post du Forum
 - [x] Suppression des reponses du Forum
-- [ ] Gestion des droits
+- [x] Gestion des droits du forum
 - [ ] Gerer les notification avec toast
 - [ ] Commenter le code
 

@@ -4,7 +4,7 @@ const Contact = () => {
       <article className="mt-3">
         <h2 className="text-3xl font-medium">Nous contacter</h2>
         <p className="mt-3 text-xl">
-          Pour toutes informations merci de nous contacter par mail à l'adresse
+          Pour toutes informations merci de nous contacter par mail à l&apos;adresse
           suivante : <br />
           <a
             className="underline text-blue-700"
@@ -32,15 +32,15 @@ const Contact = () => {
         <p className="mt-3 text-xl">
           Tous les retours sont les bienvenus, ce site est pour vous résidents
           de Gambetta. <br />
-          Aidez nous à en faire l'outil de communication dont vous avez besoin !{' '}
+          Aidez nous à en faire l&apos;outil de communication dont vous avez besoin !{' '}
           <br />
-          Photos de la résidence, Idées d'evenements, Histoire et évolution de
+          Photos de la résidence, Idées d&apos;evenements, Histoire et évolution de
           la résidence! <br />
         </p>
         <p className="text-2xl font-bold mt-4">Partagez vos anecdotes !</p>
         <p className="text-xl mt-3">
           {' '}
-          Merci d'ecrire à{' '}
+          Merci d&apos;ecrire à{' '}
           <a
             className="underline text-blue-700"
             href="mailto:postmaster@gambettaweb.fr?subject=Retour sur le site"

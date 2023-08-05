@@ -75,7 +75,7 @@ const ArticleCard = (props) => {
               <Link href={'/article/' + props.article.slug}>
                 {' '}
                 <FontAwesomeIcon icon={faBook} />{' '}
-                <span className="hidden lg:inline-block">Lire l'article</span>{' '}
+                <span className="hidden lg:inline-block">Lire l&aposarticle</span>{' '}
               </Link>
             </div>
           </div>

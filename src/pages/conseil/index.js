@@ -1,4 +1,4 @@
-import { buildDataSWR } from '@/helpers/folderFilesFetcher';
+import { BuildDataSWR } from '@/helpers/folderFilesFetcher';
 import DocumentUploadForm from '../../../components/DocumentUpload/DocumentUploadForm';
 import { getSession } from 'next-auth/react';
 import AddCR from '../../../components/Admin/AddCR/AddCR';
@@ -51,13 +51,13 @@ const Conseil = (props) => {
     ],
   ];
 
-  let commissionShow = commissions.map((commission) => (
-    <div class="col-span-12 lg:col-span-4 md:col-span-6 text-center mt-3 ">
+  let commissionShow = commissions.map((commission,i) => (
+    <div key={i} class="col-span-12 lg:col-span-4 md:col-span-6 text-center mt-3 ">
       <h4 className="text-xl mb-2 ">{commission[0]}</h4>
       <ul class=" rounded-md overflow-hidden bg-white">
         <li class="bg-blue-300 text-white ">{commission[1]}</li>
-        {commission[2].map((conseiller) => (
-          <li class="list-group-item">{conseiller} </li>
+        {commission[2].map((conseiller,j) => (
+          <li key= {j} class="list-group-item">{conseiller} </li>
         ))}
       </ul>
     </div>
@@ -65,7 +65,7 @@ const Conseil = (props) => {
 
   let docs;
   // Recuper les fichier présent dans le dossier CR et construire un tableau avec leur URL
-  const { data } = buildDataSWR('Ressources/CR');
+  const { data } = BuildDataSWR('Ressources/CR');
 
   if (data) {
     docs = data.map((doc, i) => (

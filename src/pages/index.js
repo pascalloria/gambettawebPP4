@@ -104,7 +104,7 @@ const Index = (props) => {
                 <li>Extérieur vert et jeux pour enfants</li>
                 <li>Année de construction : 1964</li>
                 <li>Batiments de 3 à 4 etages </li>
-                <li>Pas d'ascenceur</li>
+                <li>Pas d&apos;ascenceur</li>
                 <li>Proche de la gare</li>
               </ul>
             </div>

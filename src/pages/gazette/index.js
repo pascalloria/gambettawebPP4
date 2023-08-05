@@ -1,11 +1,11 @@
-import { buildDataSWR } from '@/helpers/folderFilesFetcher';
+import { BuildDataSWR } from '@/helpers/folderFilesFetcher';
 import { getSession } from 'next-auth/react';
 import AddGazette from '../../../components/Admin/AddGazette/AddGazette';
 
 const Gazette = (props) => {
   // Recuper les fichier présent dans le dossier CR et construire un tableau avec leur URL
   let docs;
-  const { data } = buildDataSWR('Ressources/Gazette');
+  const { data } = BuildDataSWR('Ressources/Gazette');
   if (data) {
     docs = data.map((doc, i) => (
       <li key={i}>
@@ -24,7 +24,7 @@ const Gazette = (props) => {
           <article className="mt-3">
             <h2 className=" text-3xl font-semibold mt-3 mb-2"> Présentation</h2>
             <p>
-              La gazette GAMBETT'Actu est une publication bimestruel (tous les 2
+              La gazette GAMBETT&apos;Actu est une publication bimestruel (tous les 2
               mois) réalisée par la commission COMMUNICATION du CS pour vous
               tenir au courant des actualités de la résidence.
               <br />
@@ -38,7 +38,7 @@ const Gazette = (props) => {
           {/* Dernier Numéro */}
           <article className="">
             <h3 className="border-t-2 pt-4 border-quartary text-2xl font-semibold mt-5 mb-3">
-              Le Nouveau numéro du <i>GAMBETT'Actu</i> !!!{' '}
+              Le Nouveau numéro du <i>GAMBETT&apos;Actu</i> !!!{' '}
             </h3>
 
             <object
