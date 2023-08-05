@@ -45,20 +45,7 @@ const ArticleBody = (props) => {
       },
       errorMessage: 'Le titre doit comporté au minimum 6 caractéres',
       touched: false,
-    },
-    slug: {
-      elementType: 'input',
-      elementConfig: {
-        type: 'text',
-        placeholder: 'Slug',
-      },
-      value: article ? article.slug : '',
-      label: 'Slug',
-      valid: article ? true : false,
-      validation: { required: true, minLength: 4 },
-      errorMessage: 'Le Slug doit comporté au minimum 4 caractéres',
-      touched: false,
-    },
+    },    
     Author: {
       elementType: 'input',
       elementConfig: {
@@ -185,8 +172,7 @@ const ArticleBody = (props) => {
         // creation de l'article sur la BDD
 
         let newArticle = {
-          title: inputs.title.value,
-          slug: inputs.slug.value,
+          title: inputs.title.value,      
           author: inputs.Author.value,
           content: inputs.Content.value,
           resume: inputs.Resume.value,
@@ -248,7 +234,7 @@ const ArticleBody = (props) => {
 
         let newArticle = {
           title: inputs.title.value,
-          slug: inputs.slug.value,
+          slug: article.slug,
           author: inputs.Author.value,
           content: inputs.Content.value,
           resume: inputs.Resume.value,

@@ -3,18 +3,21 @@ import { ObjectId } from 'mongodb';
 
 export default async function handler(req, res) {
   if (req.method == 'POST') {
-    const { title, slug, author, content, resume, imgPath } = req.body;
+    const { title,  author, content, resume, imgPath } = req.body;
     console.log(req.body);
     // verifier que tous les champs soit rempli
-    if (!title || !slug || !author || !content || !resume) {
+    if (!title || !author || !content || !resume) {
       res.status(422).json({ message: 'Champ du formulaire manquant' });
       return;
     }
 
+    // Générer le slug
+    let slug = title[0] + title[2] + title[4] + Math.floor(Math.random() * 100);
+
     // stocker le nouveau projet
     const newArticle = {
       title,
-      slug,
+      slug: slug,
       author,
       content,
       resume,

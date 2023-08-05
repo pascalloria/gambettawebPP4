@@ -2,6 +2,7 @@ import { connectToDatabase } from '@/helpers/mongoBD';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Parser } from 'html-to-react';
+import { useRouter } from 'next/router';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,6 +13,8 @@ const Slug = (props) => {
   const htmlParser = new Parser();
   let dateCreateFormated = new Date(dateCreate).toLocaleDateString('fr');
 
+  const router = useRouter()
+
   const handleDeleteArticle = async () => {
     const response = await fetch('/api/article?id=' + props.article._id, {
       method: 'DELETE',
@@ -21,6 +24,7 @@ const Slug = (props) => {
 
     if (response.ok) {
       console.log(data.message);
+      router.replace("/")
     } else {
       console.log(data.message);
     }

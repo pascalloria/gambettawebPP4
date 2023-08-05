@@ -10,10 +10,13 @@
 - [x] Fonction edition d'article
 - [x] Installer et parameter ReactQuill
 - [ ] Gerer les notification avec toast
-- [ ] Forum
+- [x] Forum
+- [x] Creation des Post et des reponse au post
+- [x] Edition et suppression des post du Forum
+- [ ] Edition et suppression des post reponses du Forum
 - [ ] Page Profil 
 - [ ] Commenter le code
-- [ ] Design
+
 
 ---
 
