@@ -67,7 +67,7 @@ const SlugPost = (props) => {
           <button className=" rounded-lg px-2 py-1 b-2  bg-quartary hover:bg-tertiaire hover:text-white  ">
             <Link href={'/forum/reply/' + props.post.slug}>
               <FontAwesomeIcon icon={faReply} />
-              <span className=" ms-2 hidden lg:inline-block">Editer</span>
+              <span className=" ms-2 hidden lg:inline-block">Répondre</span>
             </Link>
           </button>
         </div>
