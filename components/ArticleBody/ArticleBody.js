@@ -238,7 +238,7 @@ const ArticleBody = (props) => {
           author: inputs.Author.value,
           content: inputs.Content.value,
           resume: inputs.Resume.value,
-          imgPath: path,
+          imgPath: article.imgPath,
         };
         setIsLoading(true);
         setError(null);
