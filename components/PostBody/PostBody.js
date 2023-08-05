@@ -136,7 +136,7 @@ const PostBody = (props) => {
       setError(data.message || 'Une erreur est survenue');
     } else {
       setIsLoading(false);
-      router.replace('/forum/' + data.projet.slug);
+      router.replace('/forum/' + newPost.slug);
     }
   };
 

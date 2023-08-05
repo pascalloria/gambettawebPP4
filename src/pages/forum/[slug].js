@@ -75,7 +75,7 @@ const SlugPost = (props) => {
         {/* Si il y a des réponse les afficher */}
         {props.post.replys.length > 0 && (
           <div className="border-t-2 border-primary mt-2">
-            <PostReply replys={props.post.replys} />
+            <PostReply slug={props.post.slug} replys={props.post.replys} />
           </div>
         )}
       </div>

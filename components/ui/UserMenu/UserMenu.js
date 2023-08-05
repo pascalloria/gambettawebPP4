@@ -56,9 +56,9 @@ const UserMenu = (props) => {
             </>
           ) : (
             <>
-              <li className="hover:text-quartary  ">
+              {/* <li className="hover:text-quartary  ">
                 <Link href="/profil">Profil</Link>
-              </li>
+              </li> */}
               {props.user.roles.includes('Modo') && (
               <li className="hover:text-quartary  ">
                 <Link href="/admin">Administration</Link>

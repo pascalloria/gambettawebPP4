@@ -9,13 +9,21 @@
 - [x] Page admin !
 - [x] Fonction edition d'article
 - [x] Installer et parameter ReactQuill
-- [ ] Gerer les notification avec toast
 - [x] Forum
 - [x] Creation des Post et des reponse au post
 - [x] Edition et suppression des post du Forum
-- [ ] Edition et suppression des post reponses du Forum
-- [ ] Page Profil 
+- [x] Suppression des reponses du Forum
+- [ ] Gestion des droits
+- [ ] Gerer les notification avec toast
 - [ ] Commenter le code
+
+
+Piste d'amélioration
+- [ ] Page Profil 
+- [ ] Modale pour les menus déroulants 
+- [ ] Trier les Post par activité récente ?
+
+
 
 
 ---

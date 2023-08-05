@@ -14,7 +14,7 @@ const Forum = (props) => {
       <Link href={'/forum/' + post.slug}>
         <div className="flex  justify-between">
           <span>{post.sujet}</span>
-          <span> Likebtn</span>
+          {/* <span> Likebtn</span> */}
         </div>
       </Link>
     </li>
