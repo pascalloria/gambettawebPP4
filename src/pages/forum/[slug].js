@@ -3,10 +3,34 @@ import PostReply from '../../../components/PostReply/PostReply';
 import Head from 'next/head';
 import { Parser } from 'html-to-react';
 import Link from 'next/link';
+import {
+  faArrowLeft,
+  faEdit,
+  faReply,
+  faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useRouter } from 'next/router';
 
-const slugPost = (props) => {
+const SlugPost = (props) => {
   const htmlParser = new Parser();
   let dateCreate = new Date(props.post.dateCreate).toLocaleDateString('fr');
+  const router = useRouter();
+
+  const handleDeletePost = async () => {
+    const response = await fetch('/api/post?id=' + props.post._id, {
+      method: 'DELETE',
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      console.log(data.message);
+      router.replace('/forum/type/' + props.post.type);
+    } else {
+      console.log(data.message);
+    }
+  };
 
   return (
     <div className="container">
@@ -26,12 +50,25 @@ const slugPost = (props) => {
         <div className="break-words">
           {htmlParser.parse(props.post.content)}
         </div>
-        <div className='mt-2  text-end'>
-        <button className="me-2 rounded-lg px-2 py-1 b-2  bg-quartary hover:bg-tertiaire hover:text-white  ">
-            <Link href={'/forum/editer/' + props.post.slug}>Editer</Link>
+        <div className="mt-2  text-end">
+          <button
+            className=" me-2 rounded-lg px-2 py-1 b-2  bg-quartary hover:bg-tertiaire hover:text-white"
+            onClick={handleDeletePost}
+          >
+            <FontAwesomeIcon icon={faTrashAlt} />
+            <span className="  ms-2 hidden lg:inline-block">Supprimer</span>
+          </button>
+          <button className="me-2 rounded-lg px-2 py-1 b-2  bg-quartary hover:bg-tertiaire hover:text-white  ">
+            <Link href={'/forum/editer/' + props.post.slug}>
+              <FontAwesomeIcon icon={faEdit} />
+              <span className=" ms-2 hidden lg:inline-block">Editer</span>
+            </Link>
           </button>
           <button className=" rounded-lg px-2 py-1 b-2  bg-quartary hover:bg-tertiaire hover:text-white  ">
-            <Link href={'/forum/reply/' + props.post.slug}>Répondre</Link>
+            <Link href={'/forum/reply/' + props.post.slug}>
+              <FontAwesomeIcon icon={faReply} />
+              <span className=" ms-2 hidden lg:inline-block">Editer</span>
+            </Link>
           </button>
         </div>
 
@@ -46,7 +83,7 @@ const slugPost = (props) => {
   );
 };
 
-export default slugPost;
+export default SlugPost;
 
 export async function getServerSideProps(context) {
   let posts;

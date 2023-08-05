@@ -21,14 +21,9 @@ const Slug = (props) => {
 
     if (response.ok) {
       console.log(data.message);
-      props.onArticleDeleted();
     } else {
       console.log(data.message);
     }
-  };
-
-  const handleEditArticle = async () => {
-    const response = await fetch('/api/article?id=' + props.article);
   };
 
   return (
@@ -55,16 +50,18 @@ const Slug = (props) => {
             <div className=" inline-block ml-auto me-3 bg-quartary px-2 py-1 rounded-lg hover:bg-tertiaire hover:text-white  text-center text-xs md:text-base">
               <Link href={'/editer/' + slug}>
                 <FontAwesomeIcon icon={faEdit} />
-                <span className="hidden lg:inline-block">Editer</span>
+                <span className=" ms-2 hidden lg:inline-block">Editer</span>
               </Link>
             </div>
             <button
               className="inline-block ml-auto bg-quartary px-2 py-1 rounded-lg hover:bg-tertiaire hover:text-white  text-center text-xs md:text-base"
               onClick={handleDeleteArticle}
             >
-              {' '}
               <FontAwesomeIcon icon={faTrashAlt} />
-              <span className="hidden lg:inline-block"> Supprimer</span>{' '}
+              <span className=" ms-2 hidden lg:inline-block">
+                {' '}
+                Supprimer
+              </span>{' '}
             </button>
           </div>
         </div>

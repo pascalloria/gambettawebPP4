@@ -153,6 +153,7 @@ const ArticleBody = (props) => {
     setValid(formIsValid);
   };
 
+  //Fonction  Upload image et Envoie de l'article a la BDD
   const imageUploadAndSubmitHandler = async () => {
     if (!isLoading) {
       // image uploads
@@ -214,7 +215,7 @@ const ArticleBody = (props) => {
       }
     }
   };
-
+    //Fonction  Upload image et edition de l'article dans la BDD
   const imageUploadAndEditSubmitHandler = async () => {
     if (!isLoading) {
       // image uploads
@@ -289,7 +290,10 @@ const ArticleBody = (props) => {
   // pour chaque élement on appelle le composant Input et on lui passe les Props
   let form = (
     <>
-      <form className="mt-5 p-5 mx-auto max-w-full  lg:w-2/3	" onSubmit={(e) => formHandler(e)}>
+      <form
+        className="mt-5 p-5 mx-auto max-w-full  lg:w-2/3	"
+        onSubmit={(e) => formHandler(e)}
+      >
         {error && <ErrorMessage error={error} />}
         {formElementsArray.map((formElement) => (
           <Input
@@ -336,7 +340,7 @@ const ArticleBody = (props) => {
   return (
     <div className="container">
       <Head>
-        <title>{props.mode} un Article</title>       
+        <title>{props.mode} un Article</title>
       </Head>
 
       <h1 className="text-center text-3xl font-semibold">

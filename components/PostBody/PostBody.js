@@ -141,7 +141,7 @@ const PostBody = (props) => {
   };
 
   const editPostHandler = async () => {
-    let newPost;  
+    let newPost;
 
     newPost = {
       sujet: inputs.sujet.value,
@@ -149,8 +149,8 @@ const PostBody = (props) => {
       type: post.type,
       author: post.author,
       slug: post.slug,
-      replys: post.replys
-    };  
+      replys: post.replys,
+    };
 
     const response = await fetch('/api/post?id=' + post._id, {
       method: 'PUT',
