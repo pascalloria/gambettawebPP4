@@ -51,17 +51,17 @@ const Index = (props) => {
           {articles && articles}
         </div>
         {/* Bloc Droite : Information sur la résidence */}
-        <div className="col-span-12 my-3 lg:col-span-4 min-w-fit	 ">
-          <div className="sticky top-20 border-soldid border-2 border-black shadow-xl  shadow-black	 rounded-lg p-3 flex justify-center text-xl">
+        <div className="col-span-12 my-3 lg:col-span-4 break-words   lg:min-w-fit	 ">
+          <div className="sticky top-20 border-soldid border-2 text border-black shadow-xl  shadow-black	 rounded-lg p-3 flex justify-center lg:text-xl">
             <div>
-              <h3 className="font-bold text-2xl mb-1">
+              <h3 className="font-bold text-xl lg:text-2xl mb-1">
                 Coordonnées importantes
               </h3>
-              <ul className="list-disc list-inside ml-2">
+              <ul className="list-disc list-inside ">
                 <li>
                   {' '}
                   Loge :
-                  <ul className="list-circle  list-inside ml-9">
+                  <ul className="list-circle  list-inside ml-4">
                     <li>
                       <a
                         className="text-blue-500 underline"
@@ -83,7 +83,7 @@ const Index = (props) => {
                 <li>
                   {' '}
                   Conseil Syndical :
-                  <ul className="list-circle list-inside ml-9">
+                  <ul className="list-circle list-inside ml-2">
                     <li>
                       <a
                         className="text-blue-500 underline"
