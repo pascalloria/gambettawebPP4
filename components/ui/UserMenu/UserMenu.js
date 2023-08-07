@@ -25,7 +25,7 @@ const UserMenu = (props) => {
         className="text-secondary  text-xl font-semibold	pb-1   md:text-2xl  lg:text-3xl inline-flex items-center "
         onClick={clickUserMenuHandler}
       >
-        {props.user ? props.user.name : 'Connection'}
+        {props.user ? props.user.name : 'Connexion'}
         <svg
           className="w-4 h-4 ml-2"
           fill="none"
@@ -47,7 +47,7 @@ const UserMenu = (props) => {
           {!props.user ? (
             <>
               <li className="hover:text-quartary  ">
-                <Link href="/connection">Connection</Link>
+                <Link href="/connexion">Connextion</Link>
               </li>
 
               <li className="hover:text-quartary  ">
@@ -64,7 +64,7 @@ const UserMenu = (props) => {
                 <Link href="/admin">Administration</Link>
               </li>) }
               <li className="hover:text-quartary  ">
-                <button onClick={onLogoutClicHandler}>Déconnection</button>
+                <button onClick={onLogoutClicHandler}>Déconnexion</button>
               </li>
             </>
           )}

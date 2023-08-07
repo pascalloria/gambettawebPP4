@@ -139,7 +139,7 @@ const Connection = () => {
               color="#ffffff"
             />
           ) : (
-            'Connection'
+            'Connexion'
           )}
         </button>
       </form>
@@ -149,7 +149,7 @@ const Connection = () => {
   return (
     <div className="container">
       <Head>
-        <title>Connection</title>
+        <title>Connexion</title>
       </Head>
       <div className="text-3xl font-bold text-center mt-6">Connection</div>
       <div className="flex flex-col justify-center ">{form}</div>
