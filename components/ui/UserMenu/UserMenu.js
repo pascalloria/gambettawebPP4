@@ -47,7 +47,7 @@ const UserMenu = (props) => {
           {!props.user ? (
             <>
               <li className="hover:text-quartary  ">
-                <Link href="/connexion">Connextion</Link>
+                <Link href="/connexion">Connexion</Link>
               </li>
 
               <li className="hover:text-quartary  ">
