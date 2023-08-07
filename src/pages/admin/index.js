@@ -10,7 +10,7 @@ const Admin = (props) => {
   return (
     <div className="container">
       <h1 className="text-3xl font-semibold text-center">
-        Page d&aposadministration
+        Page d&apos;administration
       </h1>
 
       {props.user && props.user.roles.includes('Modo') ? (
