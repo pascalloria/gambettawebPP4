@@ -18,6 +18,14 @@
 - [ ] Commenter le code
 
 
+Bug Deploiement
+- [ ] Image du header
+- [x] Les ajouts de fichier ne fonctione qu'apres un pm2 restart !
+- [ ] Post avec image ne fonctione pas l'image est bien ajouter sur le serveur mais pas l'article.
+- [ ] Upload Photos
+
+
+
 Piste d'amélioration
 - [ ] Page Profil 
 - [ ] Modale pour les menus déroulants 
