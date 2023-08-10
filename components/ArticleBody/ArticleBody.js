@@ -165,8 +165,7 @@ const ArticleBody = (props) => {
         }
       } else {
         path = 'Header.jpg';
-      }
-      console.log(path)
+      }      
       // on verifie que l'upload c'est bien passé
       if (path) {
         // creation de l'article sur la BDD
@@ -192,6 +191,7 @@ const ArticleBody = (props) => {
         });
 
         const data = await response.json();
+        console.log(data)
         if (!response.ok) {
           setIsLoading(false);
           setError(data.message || 'Une erreur est survenue');
