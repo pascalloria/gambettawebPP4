@@ -16,6 +16,8 @@ const Photo = (props) => {
     setCat(category);
   };
 
+
+  console.log(props.photos)
   // afficher les photos
   let gridPhoto;
   if (props.photos) {
@@ -24,8 +26,8 @@ const Photo = (props) => {
         photo.cat === cat && (
           <div key={i}>
             <a href={photo.path}>
-              <figure className="overflow-hidden max-h-80">
-                <Image src={photo.path} alt={photo.title} fill />
+              <figure className="overflow-hidden max-h-80">             
+                <img src={photo.path} alt={photo.title} fill />
                 <figcaption>{photo.title}</figcaption>
               </figure>
             </a>
