@@ -164,7 +164,7 @@ const ArticleBody = (props) => {
           console.log(error.response?.data);
         }
       } else {
-        path = 'uploads/Header.jpg';
+        path = 'Header.jpg';
       }      
       // on verifie que l'upload c'est bien passé
       if (path) {
