@@ -166,7 +166,7 @@ const ArticleBody = (props) => {
       } else {
         path = 'Header.jpg';
       }
-
+      console.log(path)
       // on verifie que l'upload c'est bien passé
       if (path) {
         // creation de l'article sur la BDD
@@ -180,6 +180,7 @@ const ArticleBody = (props) => {
         };
         setIsLoading(true);
         setError(null);
+        console.log(newArticle)
         // envoyer le nouveau projet sur l'API next
         // creer un dossier "api" invisible pour l'utilisateur
         const response = await fetch('/api/article', {

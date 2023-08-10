@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { connectToDatabase } from '@/helpers/mongoBD';
 import ImageUploadFrom from '../../../components/ImageUpload/ImageUploadForm';
-
+import Image from 'next/image';
 import { getSession } from 'next-auth/react';
 import AddPhoto from '../../../components/Admin/AddPhoto/AddPhoto';
 
@@ -25,7 +25,7 @@ const Photo = (props) => {
           <div key={i}>
             <a href={photo.path}>
               <figure className="overflow-hidden max-h-80">
-                <img src={photo.path} alt={photo.title} />
+                <Image src={photo.path} alt={photo.title} fill />
                 <figcaption>{photo.title}</figcaption>
               </figure>
             </a>
