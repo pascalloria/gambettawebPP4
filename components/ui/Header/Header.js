@@ -14,7 +14,7 @@ const Header = () => {
           <div className="w-80 mt-2 mx-auto md:mt-0 ">
             <Image
               className="ml-auto"
-              src="/header.jpg"
+              src="/Header.jpg"
               alt="Residence Gambetta"
               width={417}
               height={213}
