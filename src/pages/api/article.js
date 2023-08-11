@@ -3,8 +3,7 @@ import { ObjectId } from 'mongodb';
 
 export default async function handler(req, res) {
   if (req.method == 'POST') {
-    const { title,  author, content, resume, imgPath } = req.body;
-    console.log(req.body);
+    const { title,  author, content, resume, imgPath } = req.body; 
     // verifier que tous les champs soit rempli
     if (!title || !author || !content || !resume) {
       res.status(422).json({ message: 'Champ du formulaire manquant' });
