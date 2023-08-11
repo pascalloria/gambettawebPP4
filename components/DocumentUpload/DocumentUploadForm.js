@@ -24,7 +24,7 @@ const DocumentUploadForm = (props) => {
       body.append('myDoc', selectFile);
       body.append('folder', props.folder);
       body.append('newName', newName);
-      const response = await fetch('/api/documentUpload', {
+      const response = await fetch('http://localhost:3002/fileupload', {
         method: 'POST',
         body,
       });
@@ -44,10 +44,31 @@ const DocumentUploadForm = (props) => {
         {' '}
         Ajouter {props.type}
       </h2>
+    {/* //test */}
+      <form enctype="multipart/form-data" action="http://localhost:3002/fileuploadLab" method="post">
+        <table class="table">
+          <tr>
+            <th>Select File</th>
+            <td>
+              <input type="file" name="sample_image" />
+            </td>
+            <td>
+              <input
+                type="submit"
+                name="submit"
+                class="btn btn-success"
+                value="Upload Image"
+              />
+            </td>
+          </tr>
+        </table>
+      </form>
+      {/* test */}
       <label>
         {' '}
         <input
           type="file"
+          name="sample_image"
           hidden
           onChange={({ target }) => {
             if (target.files) {
