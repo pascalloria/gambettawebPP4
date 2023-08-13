@@ -150,14 +150,17 @@ const ArticleBody = (props) => {
       if (selectFile) {
         try {
           const body = new FormData();
+          // ordre important le file doit tjrs etre envoyé en dernier
           body.append('name', inputs.title.value);
-
           body.append('folder', 'ArticlePhoto');
           body.append('file', selectFile);
-          const response = await fetch('http://localhost:5000/upload_files', {
-            method: 'POST',
-            body,
-          });
+          const response = await fetch(
+            'https://api.pascalloria.fr/upload_files',
+            {
+              method: 'POST',
+              body,
+            }
+          );
           // recuperer le resultat du fetch
           const res = await response.json();
           console.log(res.path);
