@@ -1,9 +1,8 @@
 import { useState } from 'react';
-
 import { connectToDatabase } from '@/helpers/mongoBD';
-import ImageUploadFrom from '../../../components/ImageUpload/ImageUploadForm';
-import Image from 'next/image';
 import { getSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+
 import AddPhoto from '../../../components/Admin/AddPhoto/AddPhoto';
 
 const Photo = (props) => {
@@ -11,23 +10,40 @@ const Photo = (props) => {
 
   const [cat, setCat] = useState('residence');
 
+
+
+  const router = useRouter();
+  // Call this function whenever you want to
+  // refresh props!
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
+ 
+  const handlePhotoAdd = () => {
+    refreshData();
+    toast("Article supprimé avec succés.")
+  };
+
   // function
   const afficherImg = (category) => {
     setCat(category);
   };
 
-
-  console.log(props.photos)
+  console.log(props.photos);
   // afficher les photos
   let gridPhoto;
   if (props.photos) {
     gridPhoto = props.photos.map(
       (photo, i) =>
         photo.cat === cat && (
-          <div key={i}>
-            <a href={"https://api.pascalloria.fr/"+photo.path}>
-              <figure className="overflow-hidden max-h-80">             
-                <img src={"https://api.pascalloria.fr/"+photo.path} alt={photo.title} fill />
+          <div key={i} className="flex items-center justify-center">
+            <a href={'https://api.pascalloria.fr/' + photo.path}>
+              <figure className="overflow-hidden ">
+                <img
+                  className="object-fill w-80 h-80"
+                  src={'https://api.pascalloria.fr/' + photo.path}
+                  alt={photo.title}
+                />
                 <figcaption>{photo.title}</figcaption>
               </figure>
             </a>
@@ -40,7 +56,7 @@ const Photo = (props) => {
     <div className="container">
       <h2 className="text-3xl font-semibold text-center"> Photos </h2>
 
-      {props.user && props.user.roles.includes('Modo') && <AddPhoto />}
+      {props.user && props.user.roles.includes('Modo') && <AddPhoto onPhotoAdded={handlePhotoAdd} />}
 
       <div className=" border-t-4 mt-4  pt-4 border-quartary">
         <button

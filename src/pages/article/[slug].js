@@ -37,7 +37,7 @@ const Slug = (props) => {
         <h1 className="text-3xl font-extrabold">{title}</h1>
         <Image
           className="mt-5 mx-auto"
-          src={'/' + imgPath}
+          src={'https://api.pascalloria.fr/' + imgPath}
           alt="alt"
           width={800}
           height={600}
