@@ -19,7 +19,7 @@ const AddPhoto = (props) => {
       body.append('folder', folder);
       body.append('name', newName);
       body.append('file', selectFile);
-      const response = await fetch('http://localhost:5000/upload_files', {
+      const response = await fetch('http://api.pascalloria.fr/upload_files', {
         method: 'POST',
         body,
       });
