@@ -26,7 +26,7 @@ const DocumentUploadForm = (props) => {
       body.append('folder', props.folder);
       body.append('name', newName); 
       body.append('file', selectFile);    
-      const response = await fetch('http://api.pascalloria.fr/upload_files', {
+      const response = await fetch('https://api.pascalloria.fr/upload_files', {
         method: 'POST',
         body,
       });
