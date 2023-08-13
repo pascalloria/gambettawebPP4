@@ -8,6 +8,7 @@ import Input from '../Input';
 import { checkValidity } from '@/helpers/utility';
 import ImageUploadForm from '../ImageUpload/ImageUploadForm';
 import ErrorMessage from '../ui/Error/Error';
+import Slug from '@/pages/article/[slug]';
 
 const ArticleBody = (props) => {
   // state
@@ -45,7 +46,7 @@ const ArticleBody = (props) => {
       },
       errorMessage: 'Le titre doit comporté au minimum 6 caractéres',
       touched: false,
-    },    
+    },
     Author: {
       elementType: 'input',
       elementConfig: {
@@ -149,16 +150,23 @@ const ArticleBody = (props) => {
       if (selectFile) {
         try {
           const body = new FormData();
-          body.append('myDoc', selectFile);
-          body.append('folder', 'uploads/');
-          const response = await fetch('/api/documentUpload', {
-            method: 'POST',
-            body,
-          });
+          // ordre important le file doit tjrs etre envoyé en dernier
+          body.append('name', inputs.title.value);
+          body.append('folder', 'ArticlePhoto');
+          body.append('file', selectFile);
+          const response = await fetch(
+            'https://api.pascalloria.fr/upload_files',
+            {
+              method: 'POST',
+              body,
+            }
+          );
           // recuperer le resultat du fetch
           const res = await response.json();
+          console.log(res.path);
           // recuperer le chemin vers la photo
-          path = split(res.newPath, '/').slice(2).join('/');
+          path = res.path;
+
           setImgPath(path);
         } catch (error) {
           console.log(error.response?.data);
@@ -166,13 +174,12 @@ const ArticleBody = (props) => {
       } else {
         path = 'Header.jpg';
       }
-      console.log(path)
       // on verifie que l'upload c'est bien passé
       if (path) {
         // creation de l'article sur la BDD
 
         let newArticle = {
-          title: inputs.title.value,      
+          title: inputs.title.value,
           author: inputs.Author.value,
           content: inputs.Content.value,
           resume: inputs.Resume.value,
@@ -180,7 +187,7 @@ const ArticleBody = (props) => {
         };
         setIsLoading(true);
         setError(null);
-        console.log(newArticle)
+        console.log(newArticle);
         // envoyer le nouveau projet sur l'API next
         // creer un dossier "api" invisible pour l'utilisateur
         const response = await fetch('/api/article', {
@@ -192,6 +199,7 @@ const ArticleBody = (props) => {
         });
 
         const data = await response.json();
+        console.log(data);
         if (!response.ok) {
           setIsLoading(false);
           setError(data.message || 'Une erreur est survenue');
@@ -202,7 +210,7 @@ const ArticleBody = (props) => {
       }
     }
   };
-    //Fonction  Upload image et edition de l'article dans la BDD
+  //Fonction  Upload image et edition de l'article dans la BDD
   const imageUploadAndEditSubmitHandler = async () => {
     if (!isLoading) {
       // image uploads

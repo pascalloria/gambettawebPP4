@@ -16,18 +16,19 @@ const AddPhoto = (props) => {
       if (!selectFile) return;
       setIsLoading(true);
       const body = new FormData();
-      body.append('myDoc', selectFile);
       body.append('folder', folder);
-      body.append('newName', newName);
-      const response = await fetch('/api/documentUpload', {
+      body.append('name', newName);
+      body.append('file', selectFile);
+      const response = await fetch('https://api.pascalloria.fr/upload_files', {
         method: 'POST',
         body,
       });
 
       // recuperer le resultat du fetch
       const res = await response.json();
+      console.log(res.path);
       // recuperer le chemin vers la photo
-      let path = split(res.newPath, '/').slice(2).join('/');
+      let path = res.path;
 
       // Creer un objet avec les infos sur la photos
       let newPhoto = {

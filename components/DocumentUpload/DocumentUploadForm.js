@@ -14,27 +14,32 @@ const DocumentUploadForm = (props) => {
     setNewName(event.target.value);
   };
 
-  // Uploader le document
+  // Uploader le document 
   const handleDocumentUpload = async () => {
     try {
       if (!selectFile) return;
       setIsLoading(true);
       // Transmettre des informations a l'api
       const body = new FormData();
-      body.append('myDoc', selectFile);
+      // tres important la cle file doit etre la meme sur single ou array de mutter
+     
       body.append('folder', props.folder);
-      body.append('newName', newName);
-      const response = await fetch('/api/documentUpload', {
+      body.append('name', newName); 
+      body.append('file', selectFile);    
+      const response = await fetch('https://api.pascalloria.fr/upload_files', {
         method: 'POST',
         body,
       });
-      // envoyé une notification de succés
-      toast('Document envoyé avec succés.');
-      // Vider l'input
-      document.querySelector('#name').value = '';
-    } catch (error) {
-      toast('Un probléme est survenue : ' + error.message);
-    }
+      if (response.ok) {
+        // envoyé une notification de succés
+        toast('Document envoyé avec succés.');
+        console.log(response.message)
+        // Vider l'input
+        document.querySelector('#name').value = '';
+      } else {
+        toast('Un probléme est survenue : ' + error.message);
+      }
+    } catch (error) {}
     setIsLoading(false);
   };
 
@@ -43,7 +48,7 @@ const DocumentUploadForm = (props) => {
       <h2 className="text-2xl p-2 mx-auto font-semibold text-center">
         {' '}
         Ajouter {props.type}
-      </h2>
+      </h2>     
       <label>
         {' '}
         <input
@@ -71,7 +76,6 @@ const DocumentUploadForm = (props) => {
         onChange={nameHandler}
         placeholder={props.placeholder}
       />
-
       <button
         onClick={handleDocumentUpload}
         className=" mx-auto mt-3 py-2 rounded-lg  px-3 text-2xl text-black bg-quartary hover:text-white hover:bg-tertiaire disabled:bg-primary"
