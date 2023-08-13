@@ -8,6 +8,7 @@ import Input from '../Input';
 import { checkValidity } from '@/helpers/utility';
 import ImageUploadForm from '../ImageUpload/ImageUploadForm';
 import ErrorMessage from '../ui/Error/Error';
+import Slug from '@/pages/article/[slug]';
 
 
 const ArticleBody = (props) => {
@@ -48,6 +49,7 @@ const ArticleBody = (props) => {
       },
       errorMessage: 'Le titre doit comporté au minimum 6 caractéres',
       touched: false,
+
     },
     Content: {
       elementType: 'textarea',

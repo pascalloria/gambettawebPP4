@@ -30,12 +30,14 @@ const Photo = (props) => {
   };
 
   console.log(props.photos);
+
   // afficher les photos
   let gridPhoto;
   if (props.photos) {
     gridPhoto = props.photos.map(
       (photo, i) =>
         photo.cat === cat && (
+
           <div key={i} className="flex items-center justify-center">
             <a href={'https://api.pascalloria.fr/' + photo.path}>
               <figure className="overflow-hidden ">
@@ -44,6 +46,7 @@ const Photo = (props) => {
                   src={'https://api.pascalloria.fr/' + photo.path}
                   alt={photo.title}
                 />
+
                 <figcaption>{photo.title}</figcaption>
               </figure>
             </a>
