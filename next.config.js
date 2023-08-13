@@ -4,6 +4,10 @@ const nextConfig = {
   env: {
     NEXTAUTH_URL: 'http://localhost:3000',
   },
+  images: {
+    domains: ['api.pascalloria.fr'],    
+  },
+
 };
 
 module.exports = nextConfig;

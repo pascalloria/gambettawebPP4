@@ -18,8 +18,7 @@ const ArticleCard = (props) => {
 
     const data = await response.json();
 
-    if (response.ok) {
-      console.log(data.message);
+    if (response.ok) {      
       props.onArticleDeleted();
     } else {
       console.log(data.message);
@@ -28,11 +27,12 @@ const ArticleCard = (props) => {
   return (
     <>
       <div className="max-w-2xl  rounded-lg  shadow-lg mx-auto mt-4 bg-white overflow-hidden">
-        <div className="max-h-98 ">
-          <img src={"https://api.pascalloria.fr/"+props.article.imgPath} alt="" />
+
+        <div className="max-h-98 ">          
+
           <Image
             className="w-full max-h-[36rem]  "
-            src={'/' + props.article.imgPath}
+            src={'https://api.pascalloria.fr/' + props.article.imgPath}
             alt="Residence au soleil"
             width={800}
             height={600}

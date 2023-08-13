@@ -11,6 +11,8 @@ const AddPhoto = (props) => {
 
   //function
 
+
+
   const handleDocumentUpload = async (folder, newName, catPhoto) => {
     try {
       if (!selectFile) return;
@@ -45,6 +47,15 @@ const AddPhoto = (props) => {
         },
         body: JSON.stringify(newPhoto),
       });
+
+      // Récuperer la réponse
+      const data = await responsePhoto.json();
+
+      if (responsePhoto.ok) {        
+        props.onPhotoAdded();
+      } else {
+        console.log(data.message);
+      }
     } catch (error) {}
     setIsLoading(false);
   };

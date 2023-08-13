@@ -10,6 +10,7 @@ import ImageUploadForm from '../ImageUpload/ImageUploadForm';
 import ErrorMessage from '../ui/Error/Error';
 import Slug from '@/pages/article/[slug]';
 
+
 const ArticleBody = (props) => {
   // state
   const [valid, setValid] = useState(false);
@@ -29,6 +30,8 @@ const ArticleBody = (props) => {
     }
   }, []);
 
+  console.log(props.user)
+
   // Définition des eléments du formulaire ainsi que leurs parametres
   const [inputs, setInputs] = useState({
     title: {
@@ -46,19 +49,7 @@ const ArticleBody = (props) => {
       },
       errorMessage: 'Le titre doit comporté au minimum 6 caractéres',
       touched: false,
-    },
-    Author: {
-      elementType: 'input',
-      elementConfig: {
-        type: 'text',
-        placeholder: 'Auteur',
-      },
-      value: article ? article.author : '',
-      label: 'Auteur',
-      valid: article ? true : false,
-      validation: { required: true, minLength: 3 },
-      errorMessage: "L'auteur Client doit comporté au minimum 3 caractéres",
-      touched: false,
+
     },
     Content: {
       elementType: 'textarea',
@@ -172,7 +163,7 @@ const ArticleBody = (props) => {
           console.log(error.response?.data);
         }
       } else {
-        path = 'Header.jpg';
+        path = 'uploads/ArticlePhoto/Header.jpg';
       }
       // on verifie que l'upload c'est bien passé
       if (path) {
@@ -180,7 +171,7 @@ const ArticleBody = (props) => {
 
         let newArticle = {
           title: inputs.title.value,
-          author: inputs.Author.value,
+          author: props.user.name,
           content: inputs.Content.value,
           resume: inputs.Resume.value,
           imgPath: path,
@@ -244,7 +235,7 @@ const ArticleBody = (props) => {
         let newArticle = {
           title: inputs.title.value,
           slug: article.slug,
-          author: inputs.Author.value,
+          author: article.author,
           content: inputs.Content.value,
           resume: inputs.Resume.value,
           imgPath: article.imgPath,
