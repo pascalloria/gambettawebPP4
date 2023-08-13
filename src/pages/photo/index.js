@@ -25,9 +25,9 @@ const Photo = (props) => {
       (photo, i) =>
         photo.cat === cat && (
           <div key={i}>
-            <a href={photo.path}>
+            <a href={"https://api.pascalloria.fr/"+photo.path}>
               <figure className="overflow-hidden max-h-80">             
-                <img src={photo.path} alt={photo.title} fill />
+                <img src={"https://api.pascalloria.fr/"+photo.path} alt={photo.title} fill />
                 <figcaption>{photo.title}</figcaption>
               </figure>
             </a>
