@@ -29,7 +29,7 @@ const ArticleCard = (props) => {
     <>
       <div className="max-w-2xl  rounded-lg  shadow-lg mx-auto mt-4 bg-white overflow-hidden">
         <div className="max-h-98 ">
-          <img src={"http://api.pascalloria.fr/upload_files"+props.article.imgPath} alt="" />
+          <img src={"https://api.pascalloria.fr/upload_files"+props.article.imgPath} alt="" />
           <Image
             className="w-full max-h-[36rem]  "
             src={'/' + props.article.imgPath}
