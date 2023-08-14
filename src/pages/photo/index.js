@@ -28,8 +28,6 @@ const Photo = (props) => {
     setCat(category);
   };
 
-  console.log(props.photos);
-
   // afficher les photos
   let gridPhoto;
   if (props.photos) {

@@ -29,7 +29,7 @@ Piste d'amélioration
 - [ ] Modale pour les menus déroulants 
 - [ ] Trier les Post par activité récente ?
 - [ ] Gerer les tailles possible d'image
-
+- [ ] Design de notification
 
 
 

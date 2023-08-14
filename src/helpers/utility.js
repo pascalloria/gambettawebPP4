@@ -43,7 +43,7 @@ export   const listFile = async (folderPath) => {
 
       newDocs = datas.map((doc, i) => (
         <li className="text-start" key={i}>
-          <a className="text-ellipsis overflow:hidden w-24" href={doc.path} download={doc.name}>
+          <a className="text-ellipsis overflow:hidden w-24" href={doc.path} download={doc.name} target="_blank">
             {doc.name}
           </a>
         </li>
