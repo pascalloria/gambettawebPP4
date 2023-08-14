@@ -1,6 +1,7 @@
 import { useState } from 'react';
+
 import ImageUploadFrom from '../../../components/ImageUpload/ImageUploadForm';
-import { split } from 'postcss/lib/list';
+
 
 const AddPhoto = (props) => {
   const [catPhoto, setCatPhoto] = useState('residence');

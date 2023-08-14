@@ -30,10 +30,12 @@ const DocumentUploadForm = (props) => {
         method: 'POST',
         body,
       });
+
+      const res =await response.json()
       if (response.ok) {
         // envoyé une notification de succés
-        toast('Document envoyé avec succés.');
-        console.log(response.message)
+        console.log("3")
+        props.onDocAdd()
         // Vider l'input
         document.querySelector('#name').value = '';
       } else {

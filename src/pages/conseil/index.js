@@ -1,5 +1,6 @@
 import { getSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 import AddCR from '../../../components/Admin/AddCR/AddCR';
 import { listFile } from '@/helpers/utility';
@@ -72,6 +73,13 @@ const Conseil = (props) => {
   // Definir un tableau pour stocker nos objets
   const [dataArray, setDataArray] = useState([]);
   const [docs, setDocs] = useState();
+  const [y, setY] = useState(0);
+
+  const handleDocAdd = () => {
+    console.log('1');
+    setY(y + 1);
+    toast('Document ajouté avec succés.');
+  };
 
   useEffect(() => {
     // fonction en async afin de mettre ajour seulement une fois les donnés récuperer
@@ -86,7 +94,7 @@ const Conseil = (props) => {
     };
 
     fetchData();
-  }, []);
+  }, [y]);
 
   return (
     <div className="container">
@@ -131,11 +139,11 @@ const Conseil = (props) => {
           className="col-span-12 lg:col-span-4 text-center mt-3 min-w-fit"
         >
           <div className="sticky top-20">
-            {props.user && props.user.roles.includes('Modo') && <AddCR />}
+            {props.user && props.user.roles.includes('Modo') && <AddCR onDocAdd={handleDocAdd} />}
 
             <div className=" border-soldid border-2 border-black shadow-xl  shadow-black	 rounded-lg p-3 flex flex-col justify-center text-xl">
               <h2 className="font-bold text-2xl mb-1">Compte Rendu</h2>
-              <ul className="list-disc list-inside ml-2">
+              <ul className="list-disc list-inside ml-2 text-start">
                 {!dataArray[0] && 'Loading...'}
                 {dataArray[0] && docs}
               </ul>

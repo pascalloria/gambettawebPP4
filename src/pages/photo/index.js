@@ -1,16 +1,14 @@
 import { useState } from 'react';
-import { connectToDatabase } from '@/helpers/mongoBD';
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
 import AddPhoto from '../../../components/Admin/AddPhoto/AddPhoto';
+import { connectToDatabase } from '@/helpers/mongoBD';
 
 const Photo = (props) => {
   // State
 
   const [cat, setCat] = useState('residence');
-
-
 
   const router = useRouter();
   // Call this function whenever you want to
@@ -21,7 +19,7 @@ const Photo = (props) => {
  
   const handlePhotoAdd = () => {
     refreshData();
-    toast("Article supprimé avec succés.")
+    toast("Photo ajouté avec succés.")
   };
 
   // function

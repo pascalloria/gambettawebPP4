@@ -1,5 +1,6 @@
 import { getSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import AddGazette from '../../../components/Admin/AddGazette/AddGazette';
 import { listFile } from '@/helpers/utility';
@@ -10,6 +11,13 @@ const Gazette = (props) => {
   // Definir un tableau pour stocker nos objets
   const [dataArray, setDataArray] = useState([]);
   const [docs, setDocs] = useState();
+  const [y, setY] = useState(0);
+
+  const handleDocAdd = () => {
+    console.log('1');
+    setY(y + 1);
+    toast('Document ajouté avec succés.');
+  };
 
   useEffect(() => {
     // fonction en async afin de mettre ajour seulement une fois les donnés récuperer
@@ -26,8 +34,8 @@ const Gazette = (props) => {
     };
 
     fetchData();
-  }, []);
-  // console.log(dataArray);
+  }, [y]);
+
   return (
     <div className="container">
       <div className="grid grid-cols-12 lg:gap-10">
@@ -91,7 +99,9 @@ const Gazette = (props) => {
           className=" col-span-12  my-3 xl:col-span-3  lg:col-span-4 	 "
         >
           <div className="sticky top-20">
-            {props.user && props.user.roles.includes('Modo') && <AddGazette />}
+            {props.user && props.user.roles.includes('Modo') && (
+              <AddGazette onDocAdd={handleDocAdd} />
+            )}
             <div className="mt-5 border-soldid border-2 border-black shadow-xl  shadow-black rounded-lg p-3 flex flex-col justify-center text-xl">
               <h2 className="text-2xl font-semibold">Anciens Numéros</h2>
 

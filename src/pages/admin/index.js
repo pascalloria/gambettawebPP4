@@ -1,5 +1,5 @@
 import { getSession } from 'next-auth/react';
-import { buildDataSWR } from '@/helpers/folderFilesFetcher';
+
 
 import AddGazette from '../../../components/Admin/AddGazette/AddGazette';
 import AddCR from '../../../components/Admin/AddCR/AddCR';

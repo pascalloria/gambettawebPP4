@@ -36,18 +36,20 @@ export   const listFile = async (folderPath) => {
       data.files.map((file) => {
         let infoFile = {
           path: 'https://api.pascalloria.fr/uploads/' + folderPath + '/' + file,
-          name: file.split('/')[0],
+          name: file.split('-')[0],
         };
         datas.push(infoFile);
       });
 
       newDocs = datas.map((doc, i) => (
-        <li className="text-start " key={i}>
-          <a className="text-ellipsis overflow:hidden w-24 " href={doc.path} download={doc.name}>
+        <li className="text-start" key={i}>
+          <a className="text-ellipsis overflow:hidden w-24" href={doc.path} download={doc.name}>
             {doc.name}
           </a>
         </li>
       ));
+      // afficher les documents les plus anciens en premier
+      newDocs.reverse()
     }
     return {datas,newDocs};    
   };
