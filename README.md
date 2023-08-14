@@ -53,7 +53,7 @@ Les Administrateurs peuvent :
 - bcryptjs : Permet de Hasher les MDP
 - formidable : Perment de personaliser le body envoyer en requete
 
-
+---
 
 - API NodeJs : Pour upload des documents / images sur le serveur VPS
 - Express : gere l'upload et le render des document de l'api
