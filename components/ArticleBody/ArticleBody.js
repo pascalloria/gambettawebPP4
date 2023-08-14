@@ -192,8 +192,10 @@ const ArticleBody = (props) => {
           setIsLoading(false);
           setError(data.message || 'Une erreur est survenue');
         } else {
-          setIsLoading(false);
+          setIsLoading(false); 
+          toast("Article ajouté avec succés")         
           router.replace('/article/' + data.projet.slug);
+          
         }
       }
     }

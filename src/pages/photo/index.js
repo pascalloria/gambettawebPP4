@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 import AddPhoto from '../../../components/Admin/AddPhoto/AddPhoto';
 import { connectToDatabase } from '@/helpers/mongoBD';

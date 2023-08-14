@@ -15,7 +15,8 @@
 - [x] Suppression des reponses du Forum
 - [x] Gestion des droits du forum
 - [x] Creation et deploiment d'une API nodeJS pour upload les documents
-- [ ] Gerer les notification avec toast
+- [x] Gerer les notification avec toast
+- [x] Gerer les notification avec toast
 - [ ] Commenter le code
 
 
@@ -27,6 +28,7 @@ Piste d'amélioration
 - [ ] Page Profil 
 - [ ] Modale pour les menus déroulants 
 - [ ] Trier les Post par activité récente ?
+- [ ] Gerer les tailles possible d'image
 
 
 
