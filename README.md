@@ -6,7 +6,7 @@ Le but principal est de permettre une communication entre le Conseil Syndical en
 
 Pour cela, il y a deux rôles parmi les utilisateurs.
 - Administrateur
-- Utilisateurs=
+- Utilisateurs
 
 Les Administrateurs seront moi et un ou plusieurs membres du CS.
 Les Utilisateurs seront les coproprietaires qui se seront inscrits.
