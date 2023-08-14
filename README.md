@@ -14,15 +14,12 @@
 - [x] Edition et suppression des post du Forum
 - [x] Suppression des reponses du Forum
 - [x] Gestion des droits du forum
+- [x] Creation et deploiment d'une API nodeJS pour upload les documents
 - [ ] Gerer les notification avec toast
 - [ ] Commenter le code
 
 
-Bug Deploiement
-- [ ] Image du header
-- [x] Les ajouts de fichier ne fonctione qu'apres un pm2 restart !
-- [ ] Post avec image ne fonctione pas l'image est bien ajouter sur le serveur mais pas l'article.
-- [ ] Upload Photos
+
 
 
 
@@ -46,6 +43,12 @@ Technologie use :
 - ReactQuill : Rich Text Editor
 - bcryptjs : Permet de Hasher les MDP
 - formidable : Perment de personaliser le body envoyer en requete
+
++
+
+- API NodeJs : Pour upload des documents / images sur le serveur VPS
+- Express : gere l'upload et le render des document de l'api
+- Mutler : gere le parsing du body
 
 BDD : MongoDbCloud
 ---

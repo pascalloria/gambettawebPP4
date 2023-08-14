@@ -6,7 +6,7 @@ export default function handler(req, res) {
   // construction du chemin
   const dirRelativeToPublicFolder = folderParent + '/' + folder;
   // recuperation du chemin complet
-  const dir = path.resolve('./public/', dirRelativeToPublicFolder);
+  const dir ='https://api.pascalloria.fr/uploads/'+ dirRelativeToPublicFolder;
   // Parcourir les fichier et recuperer les noms
   const filenames = fs.readdirSync(dir);
 

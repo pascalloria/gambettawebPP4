@@ -18,4 +18,36 @@ export const checkValidity = (value, rules) => {
     }
     
     return isValid
-}
+} 
+
+ // Fonction qui recupere la liste des fichier présent dans un dossier de l'API
+
+export   const listFile = async (folderPath) => {
+    let datas = [];
+    let newDocs;
+    const response = await fetch(
+      'https://api.pascalloria.fr/list_files/?addPath=' + folderPath,
+      {
+        method: 'GET',
+      }
+    );
+    const data = await response.json();
+    if (data.files) {
+      data.files.map((file) => {
+        let infoFile = {
+          path: 'https://api.pascalloria.fr/uploads/' + folderPath + '/' + file,
+          name: file.split('/')[0],
+        };
+        datas.push(infoFile);
+      });
+
+      newDocs = datas.map((doc, i) => (
+        <li className="text-start " key={i}>
+          <a className="text-ellipsis overflow:hidden w-24 " href={doc.path} download={doc.name}>
+            {doc.name}
+          </a>
+        </li>
+      ));
+    }
+    return {datas,newDocs};    
+  };

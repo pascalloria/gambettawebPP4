@@ -1,7 +1,8 @@
-import { BuildDataSWR } from '@/helpers/folderFilesFetcher';
-import DocumentUploadForm from '../../../components/DocumentUpload/DocumentUploadForm';
 import { getSession } from 'next-auth/react';
+import { useState, useEffect } from 'react';
+
 import AddCR from '../../../components/Admin/AddCR/AddCR';
+import { listFile } from '@/helpers/utility';
 
 const Conseil = (props) => {
   let commissions = [
@@ -51,35 +52,41 @@ const Conseil = (props) => {
     ],
   ];
 
-  let commissionShow = commissions.map((commission,i) => (
-    <div key={i} class="col-span-12 lg:col-span-4 md:col-span-6 text-center mt-3 ">
+  let commissionShow = commissions.map((commission, i) => (
+    <div
+      key={i}
+      class="col-span-12 lg:col-span-4 md:col-span-6 text-center mt-3 "
+    >
       <h4 className="text-xl mb-2 ">{commission[0]}</h4>
       <ul class=" rounded-md overflow-hidden bg-white">
         <li class="bg-blue-300 text-white ">{commission[1]}</li>
-        {commission[2].map((conseiller,j) => (
-          <li key= {j} class="list-group-item">{conseiller} </li>
+        {commission[2].map((conseiller, j) => (
+          <li key={j} class="list-group-item">
+            {conseiller}{' '}
+          </li>
         ))}
       </ul>
     </div>
   ));
 
-  let docs;
-  // Recuper les fichier présent dans le dossier CR et construire un tableau avec leur URL
-  const { data } = BuildDataSWR('Ressources/CR');
+  // Definir un tableau pour stocker nos objets
+  const [dataArray, setDataArray] = useState([]);
+  const [docs, setDocs] = useState();
 
-  if (data) {
-    docs = data.map((doc, i) => (
-      <li className="text-start " key={i}>
-        <a
-          className="text-ellipsis overflow:hidden w-24 "
-          href={doc.path}
-          download={doc.name}
-        >
-          {doc.name}
-        </a>
-      </li>
-    ));
-  }
+  useEffect(() => {
+    // fonction en async afin de mettre ajour seulement une fois les donnés récuperer
+    const fetchData = async () => {
+      try {
+        const { datas, newDocs } = await listFile('Ressources/CR');
+        setDataArray(datas);
+        setDocs(newDocs);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="container">
@@ -129,8 +136,8 @@ const Conseil = (props) => {
             <div className=" border-soldid border-2 border-black shadow-xl  shadow-black	 rounded-lg p-3 flex flex-col justify-center text-xl">
               <h2 className="font-bold text-2xl mb-1">Compte Rendu</h2>
               <ul className="list-disc list-inside ml-2">
-                {!data && 'Loading...'}
-                {data && docs}
+                {!dataArray[0] && 'Loading...'}
+                {dataArray[0] && docs}
               </ul>
             </div>
           </div>

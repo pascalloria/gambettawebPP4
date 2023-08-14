@@ -1,21 +1,33 @@
-import { BuildDataSWR } from '@/helpers/folderFilesFetcher';
 import { getSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+
 import AddGazette from '../../../components/Admin/AddGazette/AddGazette';
+import { listFile } from '@/helpers/utility';
 
 const Gazette = (props) => {
   // Recuper les fichier présent dans le dossier CR et construire un tableau avec leur URL
-  let docs;
-  const { data } = BuildDataSWR('Ressources/Gazette');
-  if (data) {
-    docs = data.map((doc, i) => (
-      <li key={i}>
-        <a href={doc.path} download={doc.name}>
-          {doc.name}
-        </a>
-      </li>
-    ));
-  }
 
+  // Definir un tableau pour stocker nos objets
+  const [dataArray, setDataArray] = useState([]);
+  const [docs, setDocs] = useState();
+
+  useEffect(() => {
+    // fonction en async afin de mettre ajour seulement une fois les donnés récuperer
+    const fetchData = async () => {
+      try {
+        // Recuperer la liste des fichier present dans le dossier et mise en form
+        const { datas, newDocs } = await listFile('Ressources/Gazette');
+
+        setDataArray(datas);
+        setDocs(newDocs);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  // console.log(dataArray);
   return (
     <div className="container">
       <div className="grid grid-cols-12 lg:gap-10">
@@ -24,9 +36,9 @@ const Gazette = (props) => {
           <article className="mt-3">
             <h2 className=" text-3xl font-semibold mt-3 mb-2"> Présentation</h2>
             <p>
-              La gazette GAMBETT&apos;Actu est une publication bimestruel (tous les 2
-              mois) réalisée par la commission COMMUNICATION du CS pour vous
-              tenir au courant des actualités de la résidence.
+              La gazette GAMBETT&apos;Actu est une publication bimestruel (tous
+              les 2 mois) réalisée par la commission COMMUNICATION du CS pour
+              vous tenir au courant des actualités de la résidence.
               <br />
               <br />
               Elle comportera toujours au moins un <strong>
@@ -43,14 +55,20 @@ const Gazette = (props) => {
 
             <object
               id="gazettePdf"
-              data={data ? data.slice(-1)[0].path + '#toolbar=0' : 'Loading...'}
+              data={
+                dataArray[0]
+                  ? dataArray.slice(-1)[0].path + '#toolbar=0'
+                  : 'Loading...'
+              }
               type="application/pdf"
               width="100%"
               height="600"
             >
               <embed
                 src={
-                  data ? data.slice(-1)[0].path + '#toolbar=0' : 'Loading...'
+                  dataArray[0]
+                    ? dataArray.slice(-1)[0].path + '#toolbar=0'
+                    : 'Loading...'
                 }
                 type="application/pdf"
               />
@@ -59,8 +77,8 @@ const Gazette = (props) => {
               Pour télécharger la gazette{' '}
               <a
                 className="underline text-blue-700"
-                href={data && data.slice(-1)[0].path}
-                download={data && data.slice(-1)[0].name}
+                href={dataArray[0] && dataArray.slice(-1)[0].path}
+                download={dataArray[0] && dataArray.slice(-1)[0].path}
               >
                 Cliquer ici{' '}
               </a>
@@ -78,8 +96,8 @@ const Gazette = (props) => {
               <h2 className="text-2xl font-semibold">Anciens Numéros</h2>
 
               <ul className="list-disc list-inside ml-2">
-                {!data && 'Loading...'}
-                {data && docs}
+                {!dataArray && 'Loading...'}
+                {dataArray && docs}
               </ul>
             </div>
           </div>
