@@ -1,8 +1,9 @@
 import ArticleBody from '../../../components/ArticleBody/ArticleBody';
 import { connectToDatabase } from '@/helpers/mongoBD';
+import { getSession } from 'next-auth/react';
 
 const Editer = (props) => {
-  return <ArticleBody mode="Editer" article={props.article} />;
+  return <ArticleBody mode="Editer" article={props.article} user={props.user} />;
 };
 
 export default Editer;
@@ -10,6 +11,11 @@ export default Editer;
 export async function getServerSideProps(context) {
   let articles;
   let { params } = context;
+  let user = null;
+  const session = await getSession({ req: context.req });
+  if (session) {
+    user = session.user;
+  }
 
   try {
     // Connextion a MongoDB
@@ -29,6 +35,11 @@ export async function getServerSideProps(context) {
   return {
     props: {
       article: JSON.parse(JSON.stringify(articles[0])),
+      user: user,
     },
   };
 }
+
+
+      
+ 

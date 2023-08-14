@@ -3,13 +3,12 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { SpinnerDotted } from 'spinners-react';
 import { split } from 'postcss/lib/list';
-
-import Input from '../Input';
 import { checkValidity } from '@/helpers/utility';
 import ImageUploadForm from '../ImageUpload/ImageUploadForm';
 import ErrorMessage from '../ui/Error/Error';
-import Slug from '@/pages/article/[slug]';
+import { toast } from 'react-toastify';
 
+import Input from '../Input';
 
 const ArticleBody = (props) => {
   // state
@@ -23,14 +22,13 @@ const ArticleBody = (props) => {
 
   const article = props.article;
 
+  // recuperer Afficher l'image de l'article lorsqu'on est en mode edition
   useEffect(() => {
     if (article) {
-      setSelectedImage('/' + article.imgPath);
+      setSelectedImage('https://api.pascalloria.fr/' + article.imgPath);
       setImgPath(article.imgPath);
     }
-  }, []);
-
-  console.log(props.user)
+  }, [article]);
 
   // Définition des eléments du formulaire ainsi que leurs parametres
   const [inputs, setInputs] = useState({
@@ -49,7 +47,6 @@ const ArticleBody = (props) => {
       },
       errorMessage: 'Le titre doit comporté au minimum 6 caractéres',
       touched: false,
-
     },
     Content: {
       elementType: 'textarea',
@@ -89,7 +86,7 @@ const ArticleBody = (props) => {
   });
 
   // function
-
+  console.log(selectFile);
   // Gerer le comportement lors de l'ecriture dans les inputs
   const inputChangeHandler = (event, id) => {
     const newInputs = { ...inputs };
@@ -210,61 +207,62 @@ const ArticleBody = (props) => {
       if (selectFile) {
         try {
           const body = new FormData();
-          body.append('myDoc', selectFile);
-          body.append('folder', 'uploads/');
-          const response = await fetch('/api/documentUpload', {
-            method: 'POST',
-            body,
-          });
+          body.append('name', inputs.title.value);
+          body.append('folder', 'ArticlePhoto');
+          body.append('file', selectFile);
+          const response = await fetch(
+            'https://api.pascalloria.fr/upload_files',
+            {
+              method: 'POST',
+              body,
+            }
+          );
           // recuperer le resultat du fetch
           const res = await response.json();
+
           // recuperer le chemin vers la photo
-          path = split(res.newPath, '/').slice(2).join('/');
+          path = res.path;
+          // definir le nouveau chemin de la photo
           setImgPath(path);
         } catch (error) {
           console.log(error.response?.data);
         }
-      } else {
-        path = 'Header.jpg';
       }
+      console.log(path);
+      // modification de l'article sur la BDD
+      let newArticle = {
+        title: inputs.title.value,
+        slug: article.slug,
+        author: article.author,
+        content: inputs.Content.value,
+        resume: inputs.Resume.value,
+        imgPath: path ? path : article.imgPath,
+      };
+      setIsLoading(true);
+      setError(null);
+      // envoyer le nouveau projet sur l'API next
+      // creer un dossier "api" invisible pour l'utilisateur
+      const response = await fetch('/api/article?id=' + props.article._id, {
+        method: 'PUT',
+        headers: {
+          'content-Type': 'application/json',
+        },
+        body: JSON.stringify(newArticle),
+      });
 
-      // on verifie que l'upload c'est bien passé
-      if (path) {
-        // creation de l'article sur la BDD
-
-        let newArticle = {
-          title: inputs.title.value,
-          slug: article.slug,
-          author: article.author,
-          content: inputs.Content.value,
-          resume: inputs.Resume.value,
-          imgPath: article.imgPath,
-        };
-        setIsLoading(true);
-        setError(null);
-        // envoyer le nouveau projet sur l'API next
-        // creer un dossier "api" invisible pour l'utilisateur
-        const response = await fetch('/api/article?id=' + props.article._id, {
-          method: 'PUT',
-          headers: {
-            'content-Type': 'application/json',
-          },
-          body: JSON.stringify(newArticle),
-        });
-
-        const data = await response.json();
-        if (!response.ok) {
-          setIsLoading(false);
-          setError(data.message || 'Une erreur est survenue');
-        } else {
-          setIsLoading(false);
-          router.replace('/article/' + data.projet.slug);
-        }
+      const data = await response.json();
+      if (!response.ok) {
+        setIsLoading(false);
+        setError(data.message || 'Une erreur est survenue');
+      } else {
+        setIsLoading(false);
+        toast('Article éditer avec succés.');
+        router.replace('/article/' + data.projet.slug);
       }
     }
   };
 
-  // ajouter tout les elments du formulaire dans un tableau
+  // ajouter tout les elements du formulaire dans un tableau
   const formElementsArray = [];
   for (let key in inputs) {
     formElementsArray.push({
