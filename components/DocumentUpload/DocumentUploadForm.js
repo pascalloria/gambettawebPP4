@@ -14,7 +14,7 @@ const DocumentUploadForm = (props) => {
     setNewName(event.target.value);
   };
 
-  // Uploader le document 
+  // Uploader le document
   const handleDocumentUpload = async () => {
     try {
       if (!selectFile) return;
@@ -22,20 +22,21 @@ const DocumentUploadForm = (props) => {
       // Transmettre des informations a l'api
       const body = new FormData();
       // tres important la cle file doit etre la meme sur single ou array de mutter
-     
+      // et aussi l'ordre est important
+
       body.append('folder', props.folder);
-      body.append('name', newName); 
-      body.append('file', selectFile);    
+      body.append('name', newName);
+      body.append('file', selectFile);
       const response = await fetch('https://api.pascalloria.fr/upload_files', {
         method: 'POST',
         body,
       });
 
-      const res =await response.json()
+      const res = await response.json();
       if (response.ok) {
         // envoyé une notification de succés
-        console.log("3")
-        props.onDocAdd()
+        console.log('3');
+        props.onDocAdd();
         // Vider l'input
         document.querySelector('#name').value = '';
       } else {
@@ -50,7 +51,7 @@ const DocumentUploadForm = (props) => {
       <h2 className="text-2xl p-2 mx-auto font-semibold text-center">
         {' '}
         Ajouter {props.type}
-      </h2>     
+      </h2>
       <label>
         {' '}
         <input

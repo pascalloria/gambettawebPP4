@@ -13,7 +13,7 @@ const AddPhoto = (props) => {
   //function
 
 
-
+    // Uploader le document 
   const handleDocumentUpload = async (folder, newName, catPhoto) => {
     try {
       if (!selectFile) return;
