@@ -51,7 +51,7 @@ const Navbar = (props) => {
             }
           >
             <li className=" hover:text-primary">
-              <Link href="/">Acceuil</Link>
+              <Link href="/">Accueil</Link>
             </li>
             <li className=" hover:text-primary">
               <Link href="/gazette">La gazette</Link>
