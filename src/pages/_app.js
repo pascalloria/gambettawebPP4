@@ -17,6 +17,7 @@ export default function App({ Component, pageProps }) {
       <Layout>
         <Head>
           <title>Site des Copropriétaire de la résidence GAMBETTA</title>
+          <link rel="shortcut icon" href="/Header.jpg" />
         </Head>
         <Component {...pageProps} />
       </Layout>
