@@ -43,7 +43,7 @@ const UserMenu = (props) => {
       </button>
 
       {extand && (
-        <ul className=" rounded flex flex-col justify-center items-end gap-1 p-3  absolute right-0 bottom-15 text-secondary text-lg md:text-xl  lg:text-2xl bg-tertiaire/75 ">
+        <ul className=" rounded flex flex-col justify-center items-end gap-1 p-3  absolute left-0 bottom-15 text-secondary text-lg md:text-xl  lg:text-2xl bg-tertiaire/75 ">
           {!props.user ? (
             <>
               <li className="hover:text-quartary  ">
