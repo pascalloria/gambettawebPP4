@@ -15,7 +15,7 @@ const Admin = (props) => {
 
       {props.user && props.user.roles.includes('Modo') ? (
         <>
-          <div className="flex justify-center items-center mt-5 gap-6">
+          <div className="flex flex-col sm:flex-row justify-center items-center mt-5 gap-6">
             <div className="rounded basis-2/5 border-4 px-2 py-32 text-center border-quartary">
               <Link rel="stylesheet" href="/ajouter">
                 <h2 className="inline-block px-8 rounded text-2xl py-4 font-semibold  bg-quartary hover:bg-tertiaire hover:text-secondary">
@@ -32,7 +32,7 @@ const Admin = (props) => {
             </div>
           </div>
 
-          <div className="flex justify-center items-center mt-5 gap-6">
+          <div className="flex flex-col sm:flex-row justify-center items-center flex-wrap mt-5 gap-6">
             {/*  Ajout d'un compte Rendu */}
             <div className="rounded basis-2/5 border-4 px-2 py-1 border-quartary">
               <AddCR />

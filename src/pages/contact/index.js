@@ -43,9 +43,9 @@ const Contact = () => {
           Merci d&apos;ecrire à{' '}
           <a
             className="underline text-blue-700"
-            href="mailto:postmaster@gambettaweb.fr?subject=Retour sur le site"
+            href="mailto:postmaster@gambettaweb.fr?subject=anecdotes"
           >
-            communication@gambettaweb.fr
+            postmaster@gambettaweb.fr
           </a>
         </p>
       </article>
