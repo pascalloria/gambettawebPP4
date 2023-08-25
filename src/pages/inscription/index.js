@@ -46,7 +46,7 @@ const Inscription = () => {
         required: true,
         email:true,
       },
-      errorMessage: 'Merci d"entrer un email valid',
+      errorMessage: "Merci d'entrer un email valide",
       touched: false,
     },
     password1: {
