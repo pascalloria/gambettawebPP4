@@ -1,9 +1,12 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
+
 import UserMenu from '../UserMenu/UserMenu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fa0, faBars } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/router';
+import { text } from '@fortawesome/fontawesome-svg-core';
 
 const Navbar = (props) => {
   // State
@@ -13,6 +16,7 @@ const Navbar = (props) => {
     height: undefined,
   });
 
+  const router = useRouter();
   // Permet de definir collapse a true si width > 640
   useEffect(() => {
     window.addEventListener('resize', handleResize);
@@ -50,22 +54,22 @@ const Navbar = (props) => {
               show
             }
           >
-            <li className=" hover:text-primary">
+            <li className={router.pathname=="/"? "text-tertiaire" :  "hover:text-primary"}>
               <Link href="/">Accueil</Link>
             </li>
-            <li className=" hover:text-primary">
+            <li className={router.pathname=="/gazette"? "text-tertiaire" :  "hover:text-primary"}>
               <Link href="/gazette">La gazette</Link>
             </li>
-            <li className=" hover:text-primary">
+            <li className={router.pathname=="/conseil"? "text-tertiaire" :  "hover:text-primary"}>
               <Link href="/conseil">Le Conseil</Link>
             </li>
-            <li className=" hover:text-primary">
+            <li className={router.pathname=="/photo"? "text-tertiaire" :  "hover:text-primary"}>
               <Link href="/photo">Photos</Link>
             </li>
-            <li className=" hover:text-primary">
+            <li className={router.pathname=="/contact"? "text-tertiaire" :  "hover:text-primary"}>
               <Link href="/contact">Contact</Link>
             </li>           
-            <li className=" hover:text-primary">
+            <li className={router.pathname=="/forum"? "text-tertiaire" :  "hover:text-primary"}>
               <Link href="/forum">Forum</Link>
             </li>
           
