@@ -39,7 +39,7 @@ const SlugPost = (props) => {
         <title>Forum de la résidence Gambetta</title>
       </Head>
 
-      <div className='text-xl text-tertiaire mb-3'> <a className=' hover:font-semibold '  href="/forum">Forum</a> -  <a className=' hover:font-semibold capitalize ' href={"/forum/type/"+props.post.type}>{props.post.type}</a></div>
+      <div className='text-xl text-tertiaire mb-3'> <Link className=' hover:font-semibold '  href="/forum">Forum</Link> -  <Link className=' hover:font-semibold capitalize ' href={"/forum/type/"+props.post.type}>{props.post.type}</Link></div>
       <h1 className="text-3xl font-semibold">{props.post.sujet}</h1>
 
       <div className="text-lg mt-5 border-2 border-double rounded-lg bg-white border-primary p-4">

@@ -28,9 +28,9 @@ const Forum = (props) => {
       </Head>
 
       <div className="text-xl text-tertiaire mb-3">
-        <a className="hover:font-semibold" href="/forum">
+        <Link className="hover:font-semibold" href="/forum">
           Forum
-        </a>
+        </Link>
       </div>
 
       <div className="flex mx-auto justify-between flex-wrap items-center">
