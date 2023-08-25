@@ -26,17 +26,25 @@ const Forum = (props) => {
       <Head>
         <title>Forum de la résidence Gambetta</title>
       </Head>
-      <div className="flex mx-auto justify-between lg:w-2/3 flex-wrap items-center">
+
+      <div className="text-xl text-tertiaire mb-3">
+        <a className="hover:font-semibold" href="/forum">
+          Forum
+        </a>
+      </div>
+
+      <div className="flex mx-auto justify-between flex-wrap items-center">
         <h1 className="text-3xl font-semibold mb-3">
           Catégorie : {props.type}
         </h1>
-        {props.user &&
-        <Link
-          href={'/forum/ajouter/' + props.type}
-          className="bg-quartary px-2 py-1 rounded-lg text-black hover:bg-tertiaire hover:text-white"
-        >
-          Nouveau Sujet
-        </Link>}
+        {props.user && (
+          <Link
+            href={'/forum/ajouter/' + props.type}
+            className="bg-quartary px-2 py-1 rounded-lg text-black hover:bg-tertiaire hover:text-white"
+          >
+            Nouveau Sujet
+          </Link>
+        )}
       </div>
 
       <ul className="mt-3"> {postShow}</ul>
