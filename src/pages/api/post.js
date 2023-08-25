@@ -48,8 +48,8 @@ export default async function handler(req, res) {
       projet: newPost,
     });
   } else if (req.method == 'PUT') {
-    const { sujet, content, type, author, slug , replys } = req.body;
-    console.log(req.body)
+    const { sujet, content, type, author, slug, replys } = req.body;
+    console.log(req.body);
     // verifier que tous les champs soit rempli
     if (!sujet || !content || !type || !author || !slug || !replys) {
       res.status(422).json({ message: 'Champ du formulaire manquant' });
@@ -68,8 +68,6 @@ export default async function handler(req, res) {
 
     id = new ObjectId(id);
 
-
-   
     // stocker le nouveau projet
     const newPost = {
       sujet,
@@ -91,7 +89,9 @@ export default async function handler(req, res) {
     }
     const db = clientMongoDB.db();
     try {
-      await db.collection('Forum').findOneAndReplace({ _id: id },{...newPost});
+      await db
+        .collection('Forum')
+        .findOneAndReplace({ _id: id }, { ...newPost });
     } catch (error) {
       clientMongoDB.close();
       res.status(500).json({ message: 'Un probleme est survenue' });
@@ -131,7 +131,7 @@ export default async function handler(req, res) {
         res.status(200).json({ message: 'Article supprimé avec succès' });
       } else {
         res.status(404).json({ message: 'Article non trouvé' });
-        throw new Error('Article non trouvé');        
+        throw new Error('Article non trouvé');
       }
     } catch (error) {
       clientMongoDB.close();
@@ -146,7 +146,7 @@ export default async function handler(req, res) {
     res.status(200).json({
       message: 'Article supprimé avec succés',
     });
-  }else {
+  } else {
     res.status(505).json({
       message: 'Methode interdite',
     });

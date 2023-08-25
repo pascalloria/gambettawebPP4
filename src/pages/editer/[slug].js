@@ -3,7 +3,9 @@ import { connectToDatabase } from '@/helpers/mongoBD';
 import { getSession } from 'next-auth/react';
 
 const Editer = (props) => {
-  return <ArticleBody mode="Editer" article={props.article} user={props.user} />;
+  return (
+    <ArticleBody mode="Editer" article={props.article} user={props.user} />
+  );
 };
 
 export default Editer;
@@ -19,14 +21,15 @@ export async function getServerSideProps(context) {
 
   try {
     // Connextion a MongoDB
-    const client = await connectToDatabase();
-    const db = client.db();
+    const clientDB = await connectToDatabase();
+    const db = clientDB.db();
 
     // recuperer l'article a partir de son slug
     articles = await db
       .collection('Articles')
       .find({ slug: params.slug })
       .toArray();
+    clientDB.close();
   } catch (error) {
     console.log(error.message);
     articles = [];
@@ -39,7 +42,3 @@ export async function getServerSideProps(context) {
     },
   };
 }
-
-
-      
- 

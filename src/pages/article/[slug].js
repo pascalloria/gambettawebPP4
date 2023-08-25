@@ -90,19 +90,21 @@ export async function getServerSideProps(context) {
 
   try {
     // Connextion a MongoDB
-    const client = await connectToDatabase();
-    const db = client.db();
+    const clientDB = await connectToDatabase();
+    const db = clientDB.db();
 
     // recuperer l'article a partir de son slug
     articles = await db
       .collection('Articles')
       .find({ slug: params.slug })
       .toArray();
+      clientDB.close()
   } catch (error) {
     articles = [];
 
     console.log(error);
   }
+  
 
   return {
     props: {

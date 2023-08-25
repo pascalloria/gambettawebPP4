@@ -17,10 +17,10 @@ const Photo = (props) => {
   const refreshData = () => {
     router.replace(router.asPath);
   };
- 
+
   const handlePhotoAdd = () => {
     refreshData();
-    toast("Photo ajouté avec succés.")
+    toast('Photo ajouté avec succés.');
   };
 
   // function
@@ -34,7 +34,6 @@ const Photo = (props) => {
     gridPhoto = props.photos.map(
       (photo, i) =>
         photo.cat === cat && (
-
           <div key={i} className="flex items-center justify-center">
             <a href={'https://api.pascalloria.fr/' + photo.path}>
               <figure className="overflow-hidden ">
@@ -56,7 +55,9 @@ const Photo = (props) => {
     <div className="container">
       <h2 className="text-3xl font-semibold text-center"> Photos </h2>
 
-      {props.user && props.user.roles.includes('Modo') && <AddPhoto onPhotoAdded={handlePhotoAdd} />}
+      {props.user && props.user.roles.includes('Modo') && (
+        <AddPhoto onPhotoAdded={handlePhotoAdd} />
+      )}
 
       <div className=" border-t-4 mt-4  pt-4 border-quartary">
         <button
@@ -108,11 +109,12 @@ export async function getServerSideProps(context) {
     const db = clientDB.db();
     // recuperer les projets
     photos = await db.collection('Photos').find().toArray();
+    clientDB.close();
   } catch (error) {
     console.log(error);
     photos = [];
   }
-
+  
   return {
     props: {
       photos: JSON.parse(JSON.stringify(photos)),

@@ -65,16 +65,16 @@ export async function getServerSideProps(context) {
 
   try {
     // Connextion a MongoDB
-    const client = await connectToDatabase();
-    const db = client.db();
-    console.log('test');
+    const clientDB = await connectToDatabase();
+    const db = clientDB.db();
+
     // recuperer les 6 derniers articles
     posts = await db.collection('Forum').find({ type: params.type }).toArray();
-    console.log('Post : ' + posts);
+    clientDB.close();
   } catch (error) {
     posts = [];
   }
-
+  
   return {
     props: {
       posts: JSON.parse(JSON.stringify(posts)),

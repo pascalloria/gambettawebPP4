@@ -39,7 +39,19 @@ const SlugPost = (props) => {
         <title>Forum de la résidence Gambetta</title>
       </Head>
 
-      <div className='text-xl text-tertiaire mb-3'> <Link className=' hover:font-semibold '  href="/forum">Forum</Link> -  <Link className=' hover:font-semibold capitalize ' href={"/forum/type/"+props.post.type}>{props.post.type}</Link></div>
+      <div className="text-xl text-tertiaire mb-3">
+        {' '}
+        <Link className=" hover:font-semibold " href="/forum">
+          Forum
+        </Link>{' '}
+        -{' '}
+        <Link
+          className=" hover:font-semibold capitalize "
+          href={'/forum/type/' + props.post.type}
+        >
+          {props.post.type}
+        </Link>
+      </div>
       <h1 className="text-3xl font-semibold">{props.post.sujet}</h1>
 
       <div className="text-lg mt-5 border-2 border-double rounded-lg bg-white border-primary p-4">
@@ -114,17 +126,18 @@ export async function getServerSideProps(context) {
 
   try {
     // Connextion a MongoDB
-    const client = await connectToDatabase();
-    const db = client.db();
+    const clientDB = await connectToDatabase();
+    const db = clientDB.db();
 
     // recuperer l'article a partir de son slug
     posts = await db.collection('Forum').find({ slug: params.slug }).toArray();
+    clientDB.close();
   } catch (error) {
     posts = [];
 
     console.log(error);
   }
-
+  
   return {
     props: {
       post: JSON.parse(JSON.stringify(posts[0])),

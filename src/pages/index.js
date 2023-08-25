@@ -127,8 +127,8 @@ export async function getServerSideProps(context) {
 
   try {
     // Connextion a MongoDB
-    const client = await connectToDatabase();
-    const db = client.db();
+    const clientDB = await connectToDatabase();
+    const db = clientDB.db();
 
     // recuperer les 6 derniers articles
     articles = await db
@@ -136,11 +136,12 @@ export async function getServerSideProps(context) {
       .find()
       .sort({ dateCreate: 'desc' })
       .limit(6)
-      .toArray();
+      .toArray();   
+    clientDB.close()      
   } catch (error) {
     articles = [];
   }
-
+  
   return {
     props: {
       articles: JSON.parse(JSON.stringify(articles)),
