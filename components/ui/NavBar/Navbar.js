@@ -58,20 +58,21 @@ const Navbar = (props) => {
               <Link href="/">Accueil</Link>
             </li>
             <li className={router.pathname=="/gazette"? "text-tertiaire" :  "hover:text-primary"}>
-              <Link href="/gazette">La gazette</Link>
+              <Link href="/gazette">Gazette</Link>
             </li>
             <li className={router.pathname=="/conseil"? "text-tertiaire" :  "hover:text-primary"}>
-              <Link href="/conseil">Le Conseil</Link>
+              <Link href="/conseil">Conseil</Link>
             </li>
             <li className={router.pathname=="/photo"? "text-tertiaire" :  "hover:text-primary"}>
               <Link href="/photo">Photos</Link>
             </li>
-            <li className={router.pathname=="/contact"? "text-tertiaire" :  "hover:text-primary"}>
-              <Link href="/contact">Contact</Link>
-            </li>           
             <li className={router.pathname.includes("/forum")? "text-tertiaire" :  "hover:text-primary"}>
               <Link href="/forum">Forum</Link>
             </li>
+            <li className={router.pathname=="/contact"? "text-tertiaire" :  "hover:text-primary"}>
+              <Link href="/contact">Contact</Link>
+            </li>           
+            
           
             
           </ul>
