@@ -118,7 +118,7 @@ const Conseil = (props) => {
               <div className="mt-3">
                 <p>
                   {' '}
-                  L'adresse de contact est : {' '}
+                  L&apos;adresse de contact est : {' '}
                   <a
                     className="underline text-blue-700"
                     href="mailto:cs.gambetta.yerres@gmail.com?subject=Contact via le site"
