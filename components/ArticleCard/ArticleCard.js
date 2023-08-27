@@ -53,7 +53,7 @@ const ArticleCard = (props) => {
             {props.article.author}
           </div>
           <div className="block text-xs  text-gray-700 ms-5 italic ">
-            <span className="hidden lg:inline-block">Ecrit le</span>
+            <span className="hidden lg:inline-block me-1">Ecrit le </span>
             {dateCreate}
           </div>
 
