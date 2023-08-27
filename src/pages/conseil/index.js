@@ -104,33 +104,35 @@ const Conseil = (props) => {
           <article>
             <h2 className="text-3xl font-bold mb-2"> Présentation</h2>
             <div className="text-xl ">
-              <div className="mb-5">Les membres du CS sont : </div>
+              <p className="mt-5">
+                Depuis la derniere Assembé générale, le conseil générale est au
+                nombre réduit de 3 membres.
+              </p>
+              <br />
+              <div className="mb-5">Ces membres sont : </div>
               <ul className="list-disc list-inside">
-                <li> Pascal DRIGOU: Président</li>
-                <li> Mélanie NECTOUX : vice-présidente</li>
-                <li className="">
-                  {' '}
-                  Membres : Jean-Pierre ADNOT, Bruno BARGE, Taras BORYNSKYY,
-                  Christophe D. S., Camille LEMPEREUR, Pascaline FAVARD, Angéla
-                  PINNA, Maribel NAVARRO, Danielle ZINI, Brigitte RICHARD,
-                  Philippe PILVERDIER, Pascal LORIA, Emma GERMAIN
-                </li>
+                <li> Mélanie NECTOUX </li>
+                <li> Bruno BARGE </li>
+                <li> Danielle ZINI </li>
               </ul>
               <div className="mt-3">
-                Une nouvelle adresse de contact a été créée :{' '}
+                <p>
+                  {' '}
+                  L'adresse de contact est : {' '}
+                  <a
+                    className="underline text-blue-700"
+                    href="mailto:cs.gambetta.yerres@gmail.com?subject=Contact via le site"
+                  >
+                    cs.gambetta.yerres@gmail.com
+                  </a>
+                </p>
               </div>
-              <a
-                className="underline text-blue-700"
-                href="mailto:cs.gambetta.yerres@gmail.com?subject=Contact via le site"
-              >
-                cs.gambetta.yerres@gmail.com
-              </a>
             </div>
           </article>
 
           {/* commission */}
-          <h2 className="text-3xl font-bold mb-2 mt-3">Les commissions</h2>
-          <div className="grid grid-cols-12 p-4 gap-6">{commissionShow}</div>
+          {/* <h2 className="text-3xl font-bold mb-2 mt-3">Les commissions</h2>
+          <div className="grid grid-cols-12 p-4 gap-6">{commissionShow}</div> */}
         </div>
 
         {/*  Compte rendu  */}
@@ -139,7 +141,9 @@ const Conseil = (props) => {
           className="col-span-12 lg:col-span-4 text-center mt-3 min-w-fit"
         >
           <div className="sticky top-20">
-            {props.user && props.user.roles.includes('Modo') && <AddCR onDocAdd={handleDocAdd} />}
+            {props.user && props.user.roles.includes('Modo') && (
+              <AddCR onDocAdd={handleDocAdd} />
+            )}
 
             <div className=" border-soldid border-2 border-black shadow-xl  shadow-black	 rounded-lg p-3 flex flex-col justify-center text-xl">
               <h2 className="font-bold text-2xl mb-1">Compte Rendu</h2>

@@ -12,7 +12,7 @@ const Contact = () => {
           >
             cs.gambetta.yerres@gmail.com
           </a>
-          <br />
+          <br /> <br />
           
             {' '}
             Pour tout soucis avec le site, merci de contacter : 
@@ -37,7 +37,7 @@ const Contact = () => {
           Photos de la résidence, Idées d&apos;evenements, Histoire et évolution de
           la résidence! <br />
         </p>
-        <p className="text-2xl font-bold mt-4">Partagez vos anecdotes !</p>
+        <p className="text-2xl font-bold mt-4">et partagez vos anecdotes !</p>
         <p className="text-xl mt-3">
           {' '}
           Merci d&apos;ecrire à{' '}
